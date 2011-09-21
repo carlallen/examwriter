@@ -10,15 +10,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110921224519) do
+ActiveRecord::Schema.define(:version => 20110921230945) do
 
   create_table "questions", :force => true do |t|
     t.text     "question",   :limit => 255
     t.string   "type"
-    t.string   "option_a"
-    t.string   "option_b"
-    t.string   "option_c"
-    t.string   "option_d"
+    t.text     "option_a",   :limit => 255
+    t.text     "option_b",   :limit => 255
+    t.text     "option_c",   :limit => 255
+    t.text     "option_d",   :limit => 255
     t.string   "answer"
     t.datetime "created_at"
     t.datetime "updated_at"
