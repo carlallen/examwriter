@@ -1,7 +1,7 @@
 <h1>Rules Test</h1>
 <h2>True/False</h2>
 <% @true_false.each do |question| -%>
-  <%= @question_number += 1 %>) _____ <%= question.question %>
+  <%= @question_number += 1 %>) _____ <%= question.question %><br/>
 <% end -%>
 <h2>Multiple Choice</h2>
 <% @multi_choice.each do |question| -%>
@@ -23,3 +23,5 @@
 <% @multi_choice.each do |question| -%>
   <%= @question_number += 1 %>) <%= question.answer %>
 <% end %>
+<br/>
+<%= link_to "Suggest New Question", new_question_path() %>

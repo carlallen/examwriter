@@ -1,7 +1,18 @@
 Testgen::Application.routes.draw do
+  devise_for :users, :path_names => { :sign_in => 'login'}
+  devise_scope :user do
+    get "logout", :to => "devise/sessions#destroy"
+  end
+  devise_scope :user do
+    get "login", :to => "devise/sessions#new"
+  end
+
   resources :questions do
     collection do
       get :test
+    end
+    member do
+      post :verify
     end
   end
   root :to => 'questions#test'

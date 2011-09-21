@@ -35,5 +35,14 @@
   <b><%= Question.human_attribute_name(:answer)%>:</b>
   <%= @question.answer %>
 </p>
+<% unless @question.verified? -%>
+  <%= form_tag verify_question_path(@question), :method => :post do %>
+    <%= submit_tag("Verify") %>
+  <% end -%>
+<% else -%>
+  <p>
+    <b><%= Question.human_attribute_name(:verified)%></b>
+  </p>
+<% end -%>
 
-<%= link_to 'Back', questions_path %>
+<%= link_to 'Destroy', question_path(@question), :confirm => 'Are you sure?', :method => :delete %> | <%= link_to 'Back', questions_path %>

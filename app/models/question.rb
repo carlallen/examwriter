@@ -8,4 +8,12 @@ class Question < ActiveRecord::Base
   def true_false?
     false
   end
+  
+  def verified=(value)
+  end
+  
+  def verify!
+    write_attribute(:verified, true)
+    save(:validate => false)
+  end
 end

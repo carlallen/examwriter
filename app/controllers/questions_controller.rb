@@ -1,4 +1,5 @@
 class QuestionsController < ApplicationController
+  before_filter :authenticate_user!, :except => [:test, :new, :create]
   # GET /questions
   # GET /questions.xml
   def index
@@ -49,7 +50,7 @@ class QuestionsController < ApplicationController
     
     respond_to do |format|
       if @question.save
-        format.html { redirect_to(question_url(@question), :notice => 'Question was successfully created.') }
+        format.html { redirect_to((user_signed_in? ? question_url(@question) : question_test_path()), :notice => 'Question was successfully created.') }
         format.xml  { render :xml => @question, :status => :created, :location => @question }
       else
         format.html { render :action => "new" }
@@ -74,6 +75,17 @@ class QuestionsController < ApplicationController
       format.html { redirect_to(questions_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  def verify
+    @question = Question.find params[:id]
+    @question.verify!
+    respond_to do |format|
+      format.html { redirect_to(question_url(@question), :notice => 'Question was successfully verified.') }
+      format.xml  { render :xml => @question, :status => :created, :location => @question }
+    end
+
+
   end
   
   def test
