@@ -20,6 +20,10 @@ div.field, div.actions {
   margin-bottom: 10px;
 }
 
+#alert {
+  color: red;
+}
+
 #notice {
   color: green;
 }
