@@ -17,11 +17,11 @@
 <% @question_number = 0 -%>
 <h2>True/False</h2>
 <% @true_false.each do |question| -%>
-  <%= @question_number += 1 %>) <%= question.answer %>
+  <%= @question_number += 1 %>) <%= question.answer %><br/>
 <% end -%>
 <h2>Multiple Choice</h2>
 <% @multi_choice.each do |question| -%>
-  <%= @question_number += 1 %>) <%= question.answer %>
+  <%= @question_number += 1 %>) <%= question.answer %><br/>
 <% end %>
 <br/>
 <%= link_to "Suggest New Question", new_question_path() %>

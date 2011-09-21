@@ -9,6 +9,7 @@
     <th><%= Question.human_attribute_name(:option_c)%></th>
     <th><%= Question.human_attribute_name(:option_d)%></th>
     <th><%= Question.human_attribute_name(:answer)%></th>
+    <th><%= Question.human_attribute_name(:verified)%></th>
     <th></th>
     <th></th>
     <th></th>
@@ -23,6 +24,7 @@
     <td><%= question.option_c %></td>
     <td><%= question.option_d %></td>
     <td><%= question.answer %></td>
+    <td><%= "Yes" if question.verified? %></td>
     <td><%= link_to 'Show', question_path(question) %></td>
     <td><%= link_to 'Destroy', question_path(question), :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
