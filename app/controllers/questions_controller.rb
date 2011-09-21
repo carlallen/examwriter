@@ -50,7 +50,7 @@ class QuestionsController < ApplicationController
     
     respond_to do |format|
       if @question.save
-        format.html { redirect_to((user_signed_in? ? question_url(@question) : question_test_path()), :notice => 'Question was successfully created.') }
+        format.html { redirect_to((user_signed_in? ? question_url(@question) : {:action => :test}), :notice => 'Question was successfully created.') }
         format.xml  { render :xml => @question, :status => :created, :location => @question }
       else
         format.html { render :action => "new" }
@@ -90,11 +90,11 @@ class QuestionsController < ApplicationController
   
   def test
     begin
-      @true_false = TrueFalseQuestion.limit(20).order("RANDOM()")
-      @multi_choice = MultipleChoiceQuestion.limit(20).order("RANDOM()")
+      @true_false = TrueFalseQuestion.verified.limit(20).order("RANDOM()")
+      @multi_choice = MultipleChoiceQuestion.verified.limit(20).order("RANDOM()")
     rescue
-      @true_false = TrueFalseQuestion.limit(20).order("RAND()")
-      @multi_choice = MultipleChoiceQuestion.limit(20).order("RAND()")      
+      @true_false = TrueFalseQuestion.verified.limit(20).order("RAND()")
+      @multi_choice = MultipleChoiceQuestion.verified.limit(20).order("RAND()")      
     end
     @question_number = 0
   end

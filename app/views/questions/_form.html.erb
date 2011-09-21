@@ -17,8 +17,10 @@
   </div>
   <div class="field">
     <%= f.label :type %><br />
-    <%= f.radio_button :type, "MultipleChoiceQuestion" %> Multiple Choice<br/>
-    <%= f.radio_button :type, "TrueFalseQuestion" %> True/False
+    <%= f.radio_button :type, "MultipleChoiceQuestion" %>
+    <%= f.label :type, 'Multiple Choice', :value => 'MultipleChoiceQuestion' %><br/>
+    <%= f.radio_button :type, "TrueFalseQuestion" %> 
+    <%= f.label :type, 'True/False', :value => 'TrueFalseQuestion' %>
   </div>
   
   <div class="field">
