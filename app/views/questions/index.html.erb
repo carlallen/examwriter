@@ -1,0 +1,34 @@
+<h1>Listing questions</h1>
+
+<table>
+  <tr>
+    <th>Question</th>
+    <th><%= Question.human_attribute_name(:type)%></th>
+    <th><%= Question.human_attribute_name(:option_a)%></th>
+    <th><%= Question.human_attribute_name(:option_b)%></th>
+    <th><%= Question.human_attribute_name(:option_c)%></th>
+    <th><%= Question.human_attribute_name(:option_d)%></th>
+    <th><%= Question.human_attribute_name(:answer)%></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @questions.each do |question| %>
+  <tr>
+    <td><%= question.question %></td>
+    <td><%= question.type_s %></td>
+    <td><%= question.option_a %></td>
+    <td><%= question.option_b %></td>
+    <td><%= question.option_c %></td>
+    <td><%= question.option_d %></td>
+    <td><%= question.answer %></td>
+    <td><%= link_to 'Show', question_path(question) %></td>
+    <td><%= link_to 'Destroy', question_path(question), :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Question', new_question_path %>

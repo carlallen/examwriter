@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Question:</b>
+  <%= @question.question %>
+</p>
+
+<p>
+  <b><%= Question.human_attribute_name(:type)%>:</b>
+  <%= @question.type_s %>
+</p>
+
+<% if @question.multi_choice? -%>
+<p>
+  <b><%= Question.human_attribute_name(:option_a)%>:</b>
+  <%= @question.option_a %>
+</p>
+
+<p>
+  <b><%= Question.human_attribute_name(:option_b)%>:</b>
+  <%= @question.option_b %>
+</p>
+
+<p>
+  <b><%= Question.human_attribute_name(:option_c)%>:</b>
+  <%= @question.option_c %>
+</p>
+
+<p>
+  <b><%= Question.human_attribute_name(:option_d)%>:</b>
+  <%= @question.option_d %>
+</p>
+<% end -%>
+<p>
+  <b><%= Question.human_attribute_name(:answer)%>:</b>
+  <%= @question.answer %>
+</p>
+
+<%= link_to 'Back', questions_path %>

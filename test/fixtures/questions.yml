@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  question: MyString
+  type: MyString
+  option_a: MyString
+  option_b: MyString
+  option_c: MyString
+  option_d: MyString
+  answer: MyString
+
+two:
+  question: MyString
+  type: MyString
+  option_a: MyString
+  option_b: MyString
+  option_c: MyString
+  option_d: MyString
+  answer: MyString
