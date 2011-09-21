@@ -50,7 +50,7 @@ class QuestionsController < ApplicationController
     
     respond_to do |format|
       if @question.save
-        format.html { redirect_to((user_signed_in? ? question_url(@question) : {:action => :test}), :notice => 'Question was successfully created.') }
+        format.html { redirect_to((user_signed_in? ? question_url(@question) : {:action => :new}), :notice => 'Question was successfully submitted.') }
         format.xml  { render :xml => @question, :status => :created, :location => @question }
       else
         format.html { render :action => "new" }
