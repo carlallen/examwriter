@@ -10,10 +10,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110921210657) do
+ActiveRecord::Schema.define(:version => 20110921224519) do
 
   create_table "questions", :force => true do |t|
-    t.string   "question"
+    t.text     "question",   :limit => 255
     t.string   "type"
     t.string   "option_a"
     t.string   "option_b"
