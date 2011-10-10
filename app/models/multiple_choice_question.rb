@@ -4,6 +4,15 @@ class MultipleChoiceQuestion < Question
   validates_presence_of :option_b
   validates_presence_of :option_c
   validates_presence_of :option_d
+
+  before_validation :capitalize_options
+  def capitalize_options
+    self.option_a = self.option_a.to_s.capitalize
+    self.option_b = self.option_b.to_s.capitalize
+    self.option_c = self.option_c.to_s.capitalize
+    self.option_d = self.option_d.to_s.capitalize
+  end
+
   def type_s
     "Multi Choice"
   end
