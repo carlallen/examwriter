@@ -3,7 +3,7 @@ class QuestionsController < ApplicationController
   # GET /questions
   # GET /questions.xml
   def index
-    @questions = Question.all
+    @questions = Question.paginate(:page => params[:page], :per_page => 20).order('created_at DESC')
 
     respond_to do |format|
       format.html # index.html.erb
