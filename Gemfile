@@ -1,10 +1,10 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.3'
+gem 'rails', '3.1.0'
 
 gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'devise'
-gem 'will_paginate', '~> 3.0.2'
+gem 'will_paginate'
 gem 'haml'
 # Use unicorn as the web server
 # gem 'unicorn'
