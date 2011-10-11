@@ -1,0 +1,44 @@
+= form_for(@question) do |f|
+  - if @question.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@question.errors.count, "error")} prohibited this question from being saved:"
+
+      %ul
+        - @question.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :question
+    %br
+    = f.text_area :question
+  .field
+    = f.label :type
+    %br
+    = f.radio_button :type, "MultipleChoiceQuestion"
+    = f.label :type, 'Multiple Choice', :value => 'MultipleChoiceQuestion'
+    %br
+    = f.radio_button :type, "TrueFalseQuestion"
+    = f.label :type, 'True/False', :value => 'TrueFalseQuestion'
+
+  .field
+    = f.label :option_a
+    %br
+    = f.text_field :option_a
+  .field
+    = f.label :option_b
+    %br
+    = f.text_field :option_b
+  .field
+    = f.label :option_c
+    %br
+    = f.text_field :option_c
+  .field
+    = f.label :option_d
+    %br
+    = f.text_field :option_d
+  .field
+    = f.label :answer
+    %br
+    = f.text_field :answer
+  .actions
+    = f.submit

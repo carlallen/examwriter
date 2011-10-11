@@ -1,0 +1,39 @@
+%p
+  %strong Question:
+  = @question.question
+
+%p
+  %strong= "#{Question.human_attribute_name(:type)}:"
+  = @question.type_s
+
+- if @question.multi_choice?
+  %p
+    %strong= "#{Question.human_attribute_name(:option_a)}:"
+    = @question.option_a
+
+  %p
+    %strong= "#{Question.human_attribute_name(:option_b)}:"
+    = @question.option_b
+
+  %p
+    %strong= "#{Question.human_attribute_name(:option_c)}:"
+    = @question.option_c
+
+  %p
+    %strong= "#{Question.human_attribute_name(:option_d)}:"
+    = @question.option_d
+
+%p
+  %strong= "#{Question.human_attribute_name(:answer)}:"
+  = @question.answer
+
+- unless @question.verified?
+  = form_tag verify_question_path(@question), :method => :post do
+    = submit_tag("Verify")
+- else
+  %p
+    = Question.human_attribute_name(:verified)
+
+= link_to 'Destroy', question_path(@question), :confirm => 'Are you sure?', :method => :delete
+&nbsp;|&nbsp;
+= link_to 'Back', questions_path

@@ -1,0 +1,11 @@
+%tr
+  %td= question.question
+  %td= question.type_s
+  %td= question.option_a
+  %td= question.option_b
+  %td= question.option_c
+  %td= question.option_d
+  %td= question.answer
+  %td= "Yes" if question.verified?
+  %td= link_to 'Show', question_path(question)
+  %td= link_to 'Destroy', question_path(question), :confirm => 'Are you sure?', :method => :delete

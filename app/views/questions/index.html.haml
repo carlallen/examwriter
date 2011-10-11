@@ -1,0 +1,22 @@
+%h1 Listing questions
+
+%table
+  %tr
+    %th Question
+    %th= Question.human_attribute_name(:type)
+    %th= Question.human_attribute_name(:option_a)
+    %th= Question.human_attribute_name(:option_b)
+    %th= Question.human_attribute_name(:option_c)
+    %th= Question.human_attribute_name(:option_d)
+    %th= Question.human_attribute_name(:answer)
+    %th= Question.human_attribute_name(:verified)
+    %th
+    %th
+    %th
+
+    = render :partial => "questions/question_line", :collection => @questions, :as => :question
+
+
+%br
+= will_paginate @posts
+= link_to 'New Question', new_question_path

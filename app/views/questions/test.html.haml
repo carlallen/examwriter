@@ -1,0 +1,27 @@
+%h1 Rules Test
+%h2 True/False
+- @true_false.each do |question|
+  = "#{@question_number += 1}) _____ #{question.question}"
+  %br
+%h2 Multiple Choice
+- @multi_choice.each do |question|
+  = "#{@question_number += 1}) _____ #{question.question}"
+  %ul{:style => "list-style-type:upper-alpha"}
+    %li= question.option_a
+    %li= question.option_b
+    %li= question.option_c
+    %li= question.option_d
+  %br
+
+%h1{:style => "page-break-before:always"} Key
+- @question_number = 0
+%h2 True/False
+- @true_false.each do |question|
+  = "#{@question_number += 1}) #{question.answer}"
+  %br
+%h2 Multiple Choice
+- @multi_choice.each do |question|
+  = "#{@question_number += 1}) #{question.answer}"
+  %br
+%br
+= link_to "Suggest New Question", new_question_path()
