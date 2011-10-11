@@ -4,4 +4,4 @@
 require File.expand_path('../config/application', __FILE__)
 require 'rake'
 
-Testgen::Application.load_tasks
+Testwriter::Application.load_tasks

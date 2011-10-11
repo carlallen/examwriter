@@ -1,4 +1,4 @@
-Testgen::Application.routes.draw do
+Testwriter::Application.routes.draw do
   devise_for :users, :path_names => { :sign_in => 'login'}
   devise_scope :user do
     get "logout", :to => "devise/sessions#destroy"
