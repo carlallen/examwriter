@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-Testwriter::Application.config.secret_token = 'a266095cb60310c687dbd64845090dc84f695c7a7c17c961a17f90792eaea7dae5c2825be48b192f38191d2b982b7b57530d1f7c583786c00fde604105120ed0'
+Examwriter::Application.config.secret_token = '1e0a78f0a09aff779960e440d3dd3831acc284fd9328b0618a30bfcb1e750d4336938f520a7d4911fc008ddec11b1628e20a38e1da4f2574734223a01626f410'

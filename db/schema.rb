@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,20 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110921230945) do
+ActiveRecord::Schema.define(:version => 20110921210657) do
 
   create_table "questions", :force => true do |t|
-    t.text     "question",   :limit => 255
-    t.string   "type"
-    t.text     "option_a",   :limit => 255
-    t.text     "option_b",   :limit => 255
-    t.text     "option_c",   :limit => 255
-    t.text     "option_d",   :limit => 255
-    t.string   "answer"
+    t.string   "question"
+    t.string   "type",       :limit => 50
+    t.string   "option_a"
+    t.string   "option_b"
+    t.string   "option_c"
+    t.string   "option_d"
+    t.string   "answer",     :limit => 1
+    t.boolean  "verified"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "verified"
   end
+
+  add_index "questions", ["type"], :name => "index_questions_on_type"
+  add_index "questions", ["verified"], :name => "index_questions_on_verified"
 
   create_table "users", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false

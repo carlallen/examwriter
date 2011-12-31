@@ -1,19 +1,17 @@
 class CreateQuestions < ActiveRecord::Migration
-  def self.up
+  def change
     create_table :questions do |t|
       t.string :question
-      t.string :type
+      t.string :type, :limit => 50
       t.string :option_a
       t.string :option_b
       t.string :option_c
       t.string :option_d
-      t.string :answer
-
+      t.string :answer, :limit => 1
+      t.boolean :verified
       t.timestamps
     end
-  end
-
-  def self.down
-    drop_table :questions
+    add_index :questions, :verified
+    add_index :questions, :type
   end
 end
