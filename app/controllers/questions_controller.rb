@@ -6,7 +6,7 @@ class QuestionsController < ApplicationController
     @questions = Question.paginate(:page => params[:page], :per_page => 20).order('created_at DESC')
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render :layout => "admin" } # index.html.haml
       format.xml  { render :xml => @questions }
     end
   end
@@ -17,7 +17,7 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html { render :layout => "admin" } # show.html.haml
       format.xml  { render :xml => @question }
     end
   end
@@ -28,7 +28,7 @@ class QuestionsController < ApplicationController
     @question = Question.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html { render(:layout => "admin") if user_signed_in? } # new.html.haml
       format.xml  { render :xml => @question }
     end
   end
@@ -45,7 +45,13 @@ class QuestionsController < ApplicationController
     @question = Question.new_with_inheriting(params[:question])
     respond_to do |format|
       if @question.save
-        format.html { redirect_to((user_signed_in? ? question_url(@question) : {:action => :new}), :notice => 'Question was successfully submitted.') }
+        format.html {
+          if user_signed_in?
+            redirect_to question_url(@question), :notice => 'Question was successfully created.'
+          else
+            redirect_to new_question_path, :notice => 'Question was successfully submitted.'
+          end
+        }
         format.xml  { render :xml => @question, :status => :created, :location => @question }
       else
         format.html { render :action => "new" }
@@ -79,8 +85,6 @@ class QuestionsController < ApplicationController
       format.html { redirect_to(question_url(@question), :notice => 'Question was successfully verified.') }
       format.xml  { render :xml => @question, :status => :created, :location => @question }
     end
-
-
   end
   
   def test
