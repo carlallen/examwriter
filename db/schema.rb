@@ -11,7 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110921210657) do
+ActiveRecord::Schema.define(:version => 20120101000612) do
+
+  create_table "options", :force => true do |t|
+    t.string   "key"
+    t.string   "value"
+    t.integer  "model_id"
+    t.string   "model_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "options", ["key", "model_id", "model_type"], :name => "index_options_on_key_and_model_id_and_model_type", :unique => true
+  add_index "options", ["key"], :name => "index_options_on_key"
+  add_index "options", ["model_id", "model_type"], :name => "index_options_on_model_id_and_model_type"
 
   create_table "questions", :force => true do |t|
     t.string   "question"

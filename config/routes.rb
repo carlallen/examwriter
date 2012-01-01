@@ -1,4 +1,7 @@
 Examwriter::Application.routes.draw do
+  resources :options
+  match "/options/" => "options#update_all", :via => :put
+  
   devise_for :users, :path_names => { :sign_in => 'login'}
   devise_scope :user do
     get "logout", :to => "devise/sessions#destroy"

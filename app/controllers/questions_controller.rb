@@ -89,12 +89,14 @@ class QuestionsController < ApplicationController
   end
   
   def test
+    true_false_count = Option.get "true_false_questions_count"
+    multi_choice_count = Option.get "multi_choice_questions_count"
     begin
-      @true_false = TrueFalseQuestion.verified.limit(20).order("RANDOM()")
-      @multi_choice = MultipleChoiceQuestion.verified.limit(20).order("RANDOM()")
+      @true_false = TrueFalseQuestion.verified.limit(true_false_count).order("RANDOM()")
+      @multi_choice = MultipleChoiceQuestion.verified.limit(multi_choice_count).order("RANDOM()")
     rescue
-      @true_false = TrueFalseQuestion.verified.limit(20).order("RAND()")
-      @multi_choice = MultipleChoiceQuestion.verified.limit(20).order("RAND()")      
+      @true_false = TrueFalseQuestion.verified.limit(true_false_count).order("RAND()")
+      @multi_choice = MultipleChoiceQuestion.verified.limit(multi_choice_count).order("RAND()")      
     end
     @question_number = 0
   end
