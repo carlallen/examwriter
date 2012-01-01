@@ -14,27 +14,27 @@
   .field
     = f.label :type
     %br
-    = f.radio_button :type, "MultipleChoiceQuestion"
+    = f.radio_button :type, "MultipleChoiceQuestion", :show_block => "multi_choice_options"
     = f.label :type, 'Multiple Choice', :value => 'MultipleChoiceQuestion'
     %br
-    = f.radio_button :type, "TrueFalseQuestion"
+    = f.radio_button :type, "TrueFalseQuestion", :hide_block => "multi_choice_options"
     = f.label :type, 'True/False', :value => 'TrueFalseQuestion'
-
-  .field
-    = f.label :option_a
-    %br
-    = f.text_field :option_a
-  .field
-    = f.label :option_b
-    %br
-    = f.text_field :option_b
-  .field
-    = f.label :option_c
-    %br
-    = f.text_field :option_c
-  .field
-    = f.label :option_d
-    %br
+  #multi_choice_options{:style => ("display:none" unless @question.multi_choice?)}
+    .field
+      = f.label :option_a
+      %br
+      = f.text_field :option_a
+    .field
+      = f.label :option_b
+      %br
+      = f.text_field :option_b
+    .field
+      = f.label :option_c
+      %br
+      = f.text_field :option_c
+    .field
+      = f.label :option_d
+      %br
     = f.text_field :option_d
   .field
     = f.label :answer

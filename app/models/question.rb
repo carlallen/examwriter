@@ -6,14 +6,28 @@ class Question < ActiveRecord::Base
   scope :verified, lambda { 
     {:conditions => ["verified = ?", true]}
   }
+  class << self
+    def inherited(child)
+      child.instance_eval do
+        def model_name
+          Question.model_name
+        end
+      end
+      super
+    end
   
-  def self.inherited(child)
-    child.instance_eval do
-      def model_name
-        Question.model_name
+    def new_with_inheriting(attributes = nil, options = {})
+      if attributes.is_a?(Hash)
+        
+        if attributes = HashWithIndifferentAccess.new(attributes) and attributes[:type].present? and klass = attributes[:type].constantize and klass.ancestors.include?(Question)
+        obj = klass.new(attributes, options)
+        else
+          obj = self.new(attributes = nil, options = {})
+        end
+      else
+        obj = self.new(attributes = nil, options = {})
       end
     end
-    super
   end
   
   

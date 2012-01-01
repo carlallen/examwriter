@@ -42,12 +42,7 @@ class QuestionsController < ApplicationController
   # POST /questions
   # POST /questions.xml
   def create
-    @question = Question.new(params[:question])
-    @question.type = params[:question][:type]
-    if @question.valid?
-      @question = params[:question][:type].constantize.new(params[:question])
-    end
-    
+    @question = Question.new_with_inheriting(params[:question])
     respond_to do |format|
       if @question.save
         format.html { redirect_to((user_signed_in? ? question_url(@question) : {:action => :new}), :notice => 'Question was successfully submitted.') }
