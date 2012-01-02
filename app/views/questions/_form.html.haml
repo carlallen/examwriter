@@ -14,12 +14,15 @@
   .field
     = f.label :type
     %br
-    = f.radio_button :type, "MultipleChoiceQuestion", :show_block => "#multi_choice_options", :hide_block => "#true_false_options"
-    = f.label :type, 'Multiple Choice', :value => 'MultipleChoiceQuestion'
+    = f.radio_button :type, MultipleChoiceQuestion.name, :show_block => "#multi_choice_options", :hide_block => "#true_false_options"
+    = f.label :type, MultipleChoiceQuestion.type_s, :value => MultipleChoiceQuestion.name
     %br
-    = f.radio_button :type, "TrueFalseQuestion", :hide_block => "#multi_choice_options", :show_block => "#true_false_options"
-    = f.label :type, 'True/False', :value => 'TrueFalseQuestion'
-  #multi_choice_options.answers{:style => ("display:none" unless @question.multi_choice?)}
+    = f.radio_button :type, TrueFalseQuestion.name, :hide_block => "#multi_choice_options", :show_block => "#true_false_options"
+    = f.label :type, TrueFalseQuestion.type_s, :value => TrueFalseQuestion.name
+    %br
+    = f.radio_button :type, MatchingQuestion.name, :hide_block => "#multi_choice_options,#true_false_options"
+    = f.label :type, MatchingQuestion.type_s, :value => MatchingQuestion.name
+  #multi_choice_options{:style => ("display:none" unless @question.multi_choice?)}
     .field
       = f.radio_button :answer, "A"
       = f.label :option_a

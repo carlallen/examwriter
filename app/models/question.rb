@@ -1,6 +1,5 @@
 class Question < ActiveRecord::Base
-  validates_inclusion_of :type, :in => %w( MultipleChoiceQuestion TrueFalseQuestion ), :message => "is not a valid question type."
-  validates_presence_of :answer
+  validates_inclusion_of :type, :in => %w( MatchingQuestion MultipleChoiceQuestion TrueFalseQuestion ), :message => "is not a valid question type."
   validates_presence_of :question
   
   scope :verified, lambda { 
@@ -37,10 +36,14 @@ class Question < ActiveRecord::Base
   def true_false?
     false
   end
-  
+
+  def type_s
+    self.class.type_s
+  end
+
   def verified=(value)
   end
-  
+
   def verify!
     write_attribute(:verified, true)
     save(:validate => false)

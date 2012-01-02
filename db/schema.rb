@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120101000612) do
+ActiveRecord::Schema.define(:version => 20120101195129) do
+
+  create_table "matching_options", :force => true do |t|
+    t.integer  "question_id"
+    t.string   "left_value"
+    t.string   "right_value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "options", :force => true do |t|
     t.string   "key"

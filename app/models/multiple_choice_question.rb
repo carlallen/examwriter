@@ -13,7 +13,7 @@ class MultipleChoiceQuestion < Question
     self.option_d = self.option_d.to_s.capitalize
   end
 
-  def type_s
+  def self.type_s
     "Multi Choice"
   end
   def multi_choice?
