@@ -14,10 +14,10 @@
   .field
     = f.label :type
     %br
-    = f.radio_button :type, "MultipleChoiceQuestion", :show_block => "multi_choice_options"
+    = f.radio_button :type, "MultipleChoiceQuestion", :show_block => "#multi_choice_options"
     = f.label :type, 'Multiple Choice', :value => 'MultipleChoiceQuestion'
     %br
-    = f.radio_button :type, "TrueFalseQuestion", :hide_block => "multi_choice_options"
+    = f.radio_button :type, "TrueFalseQuestion", :hide_block => "#multi_choice_options"
     = f.label :type, 'True/False', :value => 'TrueFalseQuestion'
   #multi_choice_options{:style => ("display:none" unless @question.multi_choice?)}
     .field
