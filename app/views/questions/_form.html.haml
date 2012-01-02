@@ -14,31 +14,35 @@
   .field
     = f.label :type
     %br
-    = f.radio_button :type, "MultipleChoiceQuestion", :show_block => "#multi_choice_options"
+    = f.radio_button :type, "MultipleChoiceQuestion", :show_block => "#multi_choice_options", :hide_block => "#true_false_options"
     = f.label :type, 'Multiple Choice', :value => 'MultipleChoiceQuestion'
     %br
-    = f.radio_button :type, "TrueFalseQuestion", :hide_block => "#multi_choice_options"
+    = f.radio_button :type, "TrueFalseQuestion", :hide_block => "#multi_choice_options", :show_block => "#true_false_options"
     = f.label :type, 'True/False', :value => 'TrueFalseQuestion'
-  #multi_choice_options{:style => ("display:none" unless @question.multi_choice?)}
+  #multi_choice_options.answers{:style => ("display:none" unless @question.multi_choice?)}
     .field
+      = f.radio_button :answer, "A"
       = f.label :option_a
-      %br
       = f.text_field :option_a
     .field
+      = f.radio_button :answer, "B"
       = f.label :option_b
-      %br
       = f.text_field :option_b
     .field
+      = f.radio_button :answer, "C"
       = f.label :option_c
-      %br
       = f.text_field :option_c
     .field
+      = f.radio_button :answer, "D"
       = f.label :option_d
-      %br
-    = f.text_field :option_d
-  .field
+      = f.text_field :option_d
+  .field#true_false_options{:style => ("display:none" unless @question.true_false?)}
     = f.label :answer
     %br
-    = f.text_field :answer
+    = f.radio_button :answer, "T"
+    = f.label :answer, 'True', :value => 'T'
+    %br
+    = f.radio_button :answer, "F"
+    = f.label :answer, 'False', :value => 'F'
   .actions
     = f.submit
