@@ -5,3 +5,6 @@
 Option.get("true_false_questions_count").present? || Option.set("true_false_questions_count", 20)
 Option.get("multi_choice_questions_count").present? || Option.set("multi_choice_questions_count", 20)
 Option.get("test_title").present? || Option.set("test_title", "ExamWriter")
+if Rails.env.development? and User.first.blank?
+  User.new(:email => 'test@example.com', :password => 'password').save(:validate => false)
+end
