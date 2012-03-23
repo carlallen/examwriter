@@ -6,6 +6,7 @@
   %td= question.option_c
   %td= question.option_d
   %td= question.answer
-  %td= "Yes" if question.verified?
-  %td= link_to 'Show', question_path(question)
-  %td= link_to 'Destroy', question_path(question), :confirm => 'Are you sure?', :method => :delete
+  %td= icon("ok") if question.verified?
+  %td
+    = link_to icon("pencil"), question_path(question), :title => "Edit"
+    = link_to icon("remove"), question_path(question), :confirm => 'Are you sure?', :method => :delete, :title => "Delete"

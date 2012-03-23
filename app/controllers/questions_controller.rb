@@ -6,7 +6,7 @@ class QuestionsController < ApplicationController
     @questions = Question.paginate(:page => params[:page], :per_page => 20).order('created_at DESC')
 
     respond_to do |format|
-      format.html { render :layout => "admin" } # index.html.haml
+      format.html {} # index.html.haml
       format.xml  { render :xml => @questions }
     end
   end
@@ -17,7 +17,7 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
 
     respond_to do |format|
-      format.html { render :layout => "admin" } # show.html.haml
+      format.html {} # show.html.haml
       format.xml  { render :xml => @question }
     end
   end
@@ -28,7 +28,7 @@ class QuestionsController < ApplicationController
     @question = Question.new
 
     respond_to do |format|
-      format.html { render(:layout => "admin") if user_signed_in? } # new.html.haml
+      format.html {} # new.html.haml
       format.xml  { render :xml => @question }
     end
   end

@@ -1,13 +1,14 @@
 %h1 System Settings
 
-= form_tag options_path, :method => :put, :remote => true do
-  = text_field_tag "options[test_title]", Option.get("test_title") 
-  Test Title
-  %br
-  = number_field_tag "options[true_false_questions_count]", Option.get("true_false_questions_count"),:max => 500
-  True/False Questions
-  %br
-  = number_field_tag "options[multi_choice_questions_count]", Option.get("multi_choice_questions_count"),:max => 500
-  Multiple Choice Questions
-  %br
-  = submit_tag "Save"
+= form_tag options_path, :method => :put, :remote => true, :class => "form-horizontal" do
+  .control-group
+    .control-label Test Title
+    .controls= text_field_tag "options[test_title]", Option.get("test_title") 
+  .control-group
+    .control-label True/False Questions
+    .controls= number_field_tag "options[true_false_questions_count]", Option.get("true_false_questions_count"),:max => 500
+  .control-group
+    .control-label Multiple Choice Questions
+    .controls= number_field_tag "options[multi_choice_questions_count]", Option.get("multi_choice_questions_count"),:max => 500
+  .form-actions
+    = submit_tag "Save", :class => "btn btn-primary"

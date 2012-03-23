@@ -27,13 +27,11 @@
   %strong= "#{Question.human_attribute_name(:answer)}:"
   = @question.answer
 
-- unless @question.verified?
-  = form_tag verify_question_path(@question), :method => :post do
-    = submit_tag("Verify")
-- else
+- if @question.verified?
   %p
     = Question.human_attribute_name(:verified)
-
-= link_to 'Destroy', question_path(@question), :confirm => 'Are you sure?', :method => :delete
-&nbsp;|&nbsp;
-= link_to 'Back', questions_path
+.form-actions
+  - unless @question.verified?
+    = link_to icon_with_text("ok", "Verify"), verify_question_path(@question), :method => :post, :class => "btn btn-success"
+  = link_to icon_with_text("remove", "Destroy"), question_path(@question), :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger"
+  = link_to 'Back', questions_path, :class => "btn"

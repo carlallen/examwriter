@@ -1,48 +1,25 @@
-= form_for(@question) do |f|
-  - if @question.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@question.errors.count, "error")} prohibited this question from being saved:"
-
-      %ul
-        - @question.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
-    = f.label :question
-    %br
-    = f.text_area :question
-  .field
-    = f.label :type
-    %br
-    = f.radio_button :type, "MultipleChoiceQuestion", :show_block => "#multi_choice_options", :hide_block => "#true_false_options"
-    = f.label :type, 'Multiple Choice', :value => 'MultipleChoiceQuestion'
-    %br
-    = f.radio_button :type, "TrueFalseQuestion", :hide_block => "#multi_choice_options", :show_block => "#true_false_options"
-    = f.label :type, 'True/False', :value => 'TrueFalseQuestion'
+= twitter_bootstrap_form_for @question, :html => { :class => 'form-horizontal'} do |f|
+  = f.text_area :question, :rows => 7, :style => "width:400px;"
+  = f.label :type do |controls|
+    = controls.radio_button :type, "MultipleChoiceQuestion", "Multiple Choice", :show_block => "#multi_choice_options", :hide_block => "#true_false_options"
+    = controls.radio_button :type, "TrueFalseQuestion", "True/False", :hide_block => "#multi_choice_options", :show_block => "#true_false_options"
   #multi_choice_options.answers{:style => ("display:none" unless @question.multi_choice?)}
-    .field
-      = f.radio_button :answer, "A"
-      = f.label :option_a
-      = f.text_field :option_a
-    .field
-      = f.radio_button :answer, "B"
-      = f.label :option_b
-      = f.text_field :option_b
-    .field
-      = f.radio_button :answer, "C"
-      = f.label :option_c
-      = f.text_field :option_c
-    .field
-      = f.radio_button :answer, "D"
-      = f.label :option_d
-      = f.text_field :option_d
+    = f.label :option_a do |controls|
+      = controls.text_field :option_a, :class => "span2 inline" 
+      = controls.radio_button :answer, "A", "", :inline => true, :class => "span2 inline"
+    = f.label :option_b do |controls|
+      = controls.text_field :option_b, :class => "span2 inline" 
+      = controls.radio_button :answer, "B", "", :inline => true, :class => "span2 inline"
+    = f.label :option_c do |controls|
+      = controls.text_field :option_c, :class => "span2 inline" 
+      = controls.radio_button :answer, "C", "", :inline => true, :class => "span2 inline"
+    = f.label :option_d do |controls|
+      = controls.text_field :option_d, :class => "span2 inline" 
+      = controls.radio_button :answer, "D", "", :inline => true, :class => "span2 inline"
   .field#true_false_options{:style => ("display:none" unless @question.true_false?)}
-    = f.label :answer
-    %br
-    = f.radio_button :answer, "T"
-    = f.label :answer, 'True', :value => 'T'
-    %br
-    = f.radio_button :answer, "F"
-    = f.label :answer, 'False', :value => 'F'
-  .actions
+    = f.label :answer do |controls|
+      = controls.radio_button :answer, "T"
+      = controls.radio_button :answer, "F"
+  = f.actions do
     = f.submit
+    = link_to 'Back to Test', root_url, :class => "btn"

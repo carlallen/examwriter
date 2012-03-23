@@ -1,6 +1,6 @@
 %h1 Listing questions
 
-%table
+%table.table-striped.table
   %tr
     %th Question
     %th= Question.human_attribute_name(:type)
@@ -10,13 +10,10 @@
     %th= Question.human_attribute_name(:option_d)
     %th= Question.human_attribute_name(:answer)
     %th= Question.human_attribute_name(:verified)
-    %th
-    %th
-    %th
-
+    %th Actions
     = render :partial => "questions/question_line", :collection => @questions, :as => :question
 
 
 %br
 = will_paginate @posts
-= link_to 'New Question', new_question_path
+= link_to icon_with_text("plus", "New Question"), new_question_path, :class => "btn btn-success"

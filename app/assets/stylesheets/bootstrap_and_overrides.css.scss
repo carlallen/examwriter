@@ -1,0 +1,7 @@
+// Set the correct sprite paths
+$iconSpritePath: image-path('glyphicons-halflings.png');
+$iconWhiteSpritePath: image-path('glyphicons-halflings-white.png');
+@import "bootstrap";
+body { padding-top: 60px; }
+@import "bootstrap-responsive";
+a.btn-primary:visited, a.btn-primary:hover:visited, a.btn-warning:visited, a.btn-warning:hover:visited, a.btn-danger:visited, a.btn-danger:hover:visited, a.btn-success:visited, a.btn-success:hover:visited, a.btn-info:visited, a.btn-info:hover:visited, a.btn-inverse:visited, a.btn-inverse:hover {color:white;}

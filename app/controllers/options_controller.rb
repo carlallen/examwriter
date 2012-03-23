@@ -4,7 +4,7 @@ class OptionsController < ApplicationController
   # GET /options
   def index
     respond_to do |format|
-      format.html { render :layout => "admin" }# index.html.haml
+      format.html {}# index.html.haml
       format.json { render json: Option.system }
     end
   end
