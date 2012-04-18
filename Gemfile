@@ -13,6 +13,7 @@ gem "twitter_bootstrap_form_for", :git => "git://github.com/medhistree/twitter_b
 # in production environments by default.
 group :development do
   gem 'sqlite3'
+  gem 'heroku'
 end
 
 group :assets do
@@ -26,12 +27,10 @@ group :production do
   gem 'pg'
 end
 
-group :test do
-  # Pretty printed test output
-  gem 'turn', '0.8.2', :require => false
-end
-
 group :development, :test do
   gem 'ruby-debug19'
-  gem 'heroku'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'poltergeist'
 end
