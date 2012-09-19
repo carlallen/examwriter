@@ -1,0 +1,2465 @@
+  [1m[36m (1.5ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (1.0ms)[0m  CREATE TABLE "options" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "key" varchar(255), "value" varchar(255), "model_id" integer, "model_type" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("options")[0m
+  [1m[35m (1.0ms)[0m  CREATE UNIQUE INDEX "index_options_on_key_and_model_id_and_model_type" ON "options" ("key", "model_id", "model_type")
+  [1m[36m (0.1ms)[0m  [1mPRAGMA index_list("options")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_info('index_options_on_key_and_model_id_and_model_type')
+  [1m[36m (0.9ms)[0m  [1mCREATE INDEX "index_options_on_key" ON "options" ("key")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("options")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_info('index_options_on_key')[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_info('index_options_on_key_and_model_id_and_model_type')
+  [1m[36m (1.1ms)[0m  [1mCREATE INDEX "index_options_on_model_id_and_model_type" ON "options" ("model_id", "model_type")[0m
+  [1m[35m (1.3ms)[0m  CREATE TABLE "questions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "question" varchar(255), "type" varchar(50), "option_a" varchar(255), "option_b" varchar(255), "option_c" varchar(255), "option_d" varchar(255), "answer" varchar(1), "verified" boolean, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("questions")[0m
+  [1m[35m (0.9ms)[0m  CREATE INDEX "index_questions_on_type" ON "questions" ("type")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("questions")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_info('index_questions_on_type')
+  [1m[36m (1.0ms)[0m  [1mCREATE INDEX "index_questions_on_verified" ON "questions" ("verified")[0m
+  [1m[35m (1.3ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255) DEFAULT '' NOT NULL, "encrypted_password" varchar(128) DEFAULT '' NOT NULL, "reset_password_token" varchar(255), "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255), "last_sign_in_ip" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("users")[0m
+  [1m[35m (1.2ms)[0m  CREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("users")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_info('index_users_on_email')
+  [1m[36m (0.8ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35m (1.0ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("schema_migrations")[0m
+  [1m[35m (1.2ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.1ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (1.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20120101000612')
+  [1m[36m (0.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20110921190143')[0m
+  [1m[35m (0.9ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20110921210657')
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Creating scope :system. Overwriting existing method Option.system.
+  [1m[35mOption Load (0.1ms)[0m  SELECT "options".* FROM "options" WHERE "options"."key" = 'true_false_questions_count' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1
+  [1m[36mOption Load (0.1ms)[0m  [1mSELECT "options".* FROM "options" WHERE "options"."key" = 'true_false_questions_count' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mOption Exists (0.1ms)[0m  [1mSELECT 1 FROM "options" WHERE "options"."key" = 'true_false_questions_count' LIMIT 1[0m
+  [1m[35mSQL (1.2ms)[0m  INSERT INTO "options" ("created_at", "key", "model_id", "model_type", "updated_at", "value") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Wed, 19 Sep 2012 17:42:04 UTC +00:00], ["key", "true_false_questions_count"], ["model_id", nil], ["model_type", nil], ["updated_at", Wed, 19 Sep 2012 17:42:04 UTC +00:00], ["value", 20]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35mOption Load (0.1ms)[0m  SELECT "options".* FROM "options" WHERE "options"."key" = 'multi_choice_questions_count' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1
+  [1m[36mOption Load (0.1ms)[0m  [1mSELECT "options".* FROM "options" WHERE "options"."key" = 'multi_choice_questions_count' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mOption Exists (0.1ms)[0m  [1mSELECT 1 FROM "options" WHERE "options"."key" = 'multi_choice_questions_count' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "options" ("created_at", "key", "model_id", "model_type", "updated_at", "value") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Wed, 19 Sep 2012 17:42:04 UTC +00:00], ["key", "multi_choice_questions_count"], ["model_id", nil], ["model_type", nil], ["updated_at", Wed, 19 Sep 2012 17:42:04 UTC +00:00], ["value", 20]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
+  [1m[35mOption Load (0.1ms)[0m  SELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1
+  [1m[36mOption Load (0.1ms)[0m  [1mSELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mOption Exists (0.1ms)[0m  [1mSELECT 1 FROM "options" WHERE "options"."key" = 'test_title' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "options" ("created_at", "key", "model_id", "model_type", "updated_at", "value") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Wed, 19 Sep 2012 17:42:04 UTC +00:00], ["key", "test_title"], ["model_id", nil], ["model_type", nil], ["updated_at", Wed, 19 Sep 2012 17:42:04 UTC +00:00], ["value", "ExamWriter"]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Binary data inserted for `string` type on column `encrypted_password`
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "users" ("created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "remember_created_at", "reset_password_sent_at", "reset_password_token", "sign_in_count", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["created_at", Wed, 19 Sep 2012 17:42:04 UTC +00:00], ["current_sign_in_at", nil], ["current_sign_in_ip", nil], ["email", "test@example.com"], ["encrypted_password", "$2a$10$qWemL7zm3z7cqzMbg.KcqeB1u3RFsejmJXUvrJSqU04Q7PUOLUD5W"], ["last_sign_in_at", nil], ["last_sign_in_ip", nil], ["remember_created_at", nil], ["reset_password_sent_at", nil], ["reset_password_token", nil], ["sign_in_count", 0], ["updated_at", Wed, 19 Sep 2012 17:42:04 UTC +00:00]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
+
+
+Started GET "/" for 127.0.0.1 at 2012-09-19 10:42:13 -0700
+Processing by QuestionsController#test as HTML
+Creating scope :system. Overwriting existing method Option.system.
+  [1m[36mOption Load (0.1ms)[0m  [1mSELECT "options".* FROM "options" WHERE "options"."key" = 'true_false_questions_count' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1[0m
+  [1m[35mOption Load (0.1ms)[0m  SELECT "options".* FROM "options" WHERE "options"."key" = 'multi_choice_questions_count' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1
+  [1m[36mOption Load (0.2ms)[0m  [1mSELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(count_column) FROM (SELECT 1 AS count_column FROM "questions" WHERE "questions"."type" IN ('TrueFalseQuestion') AND (verified = 't') LIMIT 20) subquery_for_count 
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(count_column) FROM (SELECT 1 AS count_column FROM "questions" WHERE "questions"."type" IN ('MultipleChoiceQuestion') AND (verified = 't') LIMIT 20) subquery_for_count [0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT COUNT(count_column) FROM (SELECT 1 AS count_column FROM "questions" WHERE "questions"."type" IN ('TrueFalseQuestion') AND (verified = 't') LIMIT 20) subquery_for_count 
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT COUNT(count_column) FROM (SELECT 1 AS count_column FROM "questions" WHERE "questions"."type" IN ('MultipleChoiceQuestion') AND (verified = 't') LIMIT 20) subquery_for_count [0m
+  Rendered questions/test.html.haml within layouts/application (6.4ms)
+  [1m[35mCACHE (0.0ms)[0m  SELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1
+Compiled bootstrap_and_overrides.css  (1164ms)  (pid 11674)
+Compiled application.css  (1209ms)  (pid 11674)
+Compiled jquery.js  (1ms)  (pid 11674)
+Compiled jquery_ujs.js  (0ms)  (pid 11674)
+Compiled bootstrap-transition.js  (0ms)  (pid 11674)
+Compiled bootstrap-alert.js  (0ms)  (pid 11674)
+Compiled bootstrap-button.js  (0ms)  (pid 11674)
+Compiled bootstrap-carousel.js  (0ms)  (pid 11674)
+Compiled bootstrap-collapse.js  (0ms)  (pid 11674)
+Compiled bootstrap-dropdown.js  (0ms)  (pid 11674)
+Compiled bootstrap-modal.js  (0ms)  (pid 11674)
+Compiled bootstrap-scrollspy.js  (0ms)  (pid 11674)
+Compiled bootstrap-tab.js  (0ms)  (pid 11674)
+Compiled bootstrap-tooltip.js  (0ms)  (pid 11674)
+Compiled bootstrap-popover.js  (0ms)  (pid 11674)
+Compiled bootstrap-typeahead.js  (0ms)  (pid 11674)
+Compiled bootstrap.js  (160ms)  (pid 11674)
+Compiled exam.js  (93ms)  (pid 11674)
+Compiled options.js  (51ms)  (pid 11674)
+Compiled application.js  (373ms)  (pid 11674)
+Compiled print.css  (0ms)  (pid 11674)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1[0m
+  Rendered shared/_flash.html.haml (1.3ms)
+Completed 200 OK in 1735ms (Views: 1712.8ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-09-19 10:42:15 -0700
+Served asset /application.css - 200 OK (8ms)
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2012-09-19 10:42:15 -0700
+Served asset /bootstrap_and_overrides.css - 200 OK (4ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:15 -0700
+Served asset /jquery.js - 200 OK (2ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:15 -0700
+Served asset /jquery_ujs.js - 200 OK (1ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:15 -0700
+Served asset /bootstrap-transition.js - 200 OK (1ms)
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:15 -0700
+Served asset /bootstrap-alert.js - 200 OK (1ms)
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:15 -0700
+Served asset /bootstrap-button.js - 200 OK (1ms)
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:15 -0700
+Served asset /bootstrap-carousel.js - 200 OK (1ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:15 -0700
+Served asset /bootstrap-modal.js - 200 OK (1ms)
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:15 -0700
+Served asset /bootstrap-collapse.js - 200 OK (1ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:15 -0700
+Served asset /bootstrap-dropdown.js - 200 OK (1ms)
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:15 -0700
+Served asset /bootstrap-scrollspy.js - 200 OK (32ms)
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:15 -0700
+Served asset /bootstrap-tab.js - 200 OK (1ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:15 -0700
+Served asset /bootstrap-tooltip.js - 200 OK (1ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:15 -0700
+Served asset /bootstrap-popover.js - 200 OK (1ms)
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:15 -0700
+Served asset /bootstrap-typeahead.js - 200 OK (1ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:15 -0700
+Served asset /bootstrap.js - 200 OK (8ms)
+
+
+Started GET "/assets/exam.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:15 -0700
+Served asset /exam.js - 200 OK (1ms)
+
+
+Started GET "/assets/options.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:15 -0700
+Served asset /options.js - 200 OK (0ms)
+
+
+Started GET "/assets/print.css?body=1" for 127.0.0.1 at 2012-09-19 10:42:15 -0700
+Served asset /print.css - 200 OK (1ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:15 -0700
+Served asset /application.js - 200 OK (12ms)
+
+
+Started GET "/assets/glyphicons-halflings-white.png" for 127.0.0.1 at 2012-09-19 10:42:16 -0700
+Served asset /glyphicons-halflings-white.png - 200 OK (5ms)
+
+
+Started GET "/questions" for 127.0.0.1 at 2012-09-19 10:42:32 -0700
+Processing by QuestionsController#index as HTML
+Completed 401 Unauthorized in 6ms
+
+
+Started GET "/users/login" for 127.0.0.1 at 2012-09-19 10:42:32 -0700
+Processing by Devise::SessionsController#new as HTML
+DEPRECATION WARNING: Rendering partials devise/shared/_links.erb is deprecatedplease use devise/_links.erb instead. (called from _app_views_devise_sessions_new_html_haml__3209920640097495976_70232917828760 at /Users/carlallen/projects/examwriter/app/views/devise/sessions/new.html.haml:13)
+  Rendered /Users/carlallen/.rvm/gems/ruby-1.9.3-p125/gems/devise-2.0.4/app/views/devise/_links.erb (0.6ms)
+  Rendered /Users/carlallen/.rvm/gems/ruby-1.9.3-p125/gems/devise-2.0.4/app/views/devise/shared/_links.erb (2.4ms)
+  Rendered devise/sessions/new.html.haml within layouts/application (44.3ms)
+  [1m[35mOption Load (0.1ms)[0m  SELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1[0m
+  Rendered shared/_flash.html.haml (0.1ms)
+Completed 200 OK in 66ms (Views: 55.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:33 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2012-09-19 10:42:33 -0700
+Served asset /bootstrap_and_overrides.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-09-19 10:42:33 -0700
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:33 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:33 -0700
+Served asset /bootstrap-transition.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:33 -0700
+Served asset /bootstrap-alert.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:33 -0700
+Served asset /bootstrap-button.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:33 -0700
+Served asset /bootstrap-carousel.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:33 -0700
+Served asset /bootstrap-collapse.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:33 -0700
+Served asset /bootstrap-dropdown.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:33 -0700
+Served asset /bootstrap-modal.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:33 -0700
+Served asset /bootstrap-scrollspy.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:33 -0700
+Served asset /bootstrap-tab.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:33 -0700
+Served asset /bootstrap-tooltip.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:33 -0700
+Served asset /bootstrap-popover.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:33 -0700
+Served asset /bootstrap-typeahead.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:33 -0700
+Served asset /bootstrap.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/exam.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:33 -0700
+Served asset /exam.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/options.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:33 -0700
+Served asset /options.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:33 -0700
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/print.css?body=1" for 127.0.0.1 at 2012-09-19 10:42:33 -0700
+Served asset /print.css - 304 Not Modified (0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2012-09-19 10:42:34 -0700
+Processing by QuestionsController#test as HTML
+  [1m[35mOption Load (0.1ms)[0m  SELECT "options".* FROM "options" WHERE "options"."key" = 'true_false_questions_count' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1
+  [1m[36mOption Load (0.1ms)[0m  [1mSELECT "options".* FROM "options" WHERE "options"."key" = 'multi_choice_questions_count' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1[0m
+  [1m[35mOption Load (0.1ms)[0m  SELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(count_column) FROM (SELECT 1 AS count_column FROM "questions" WHERE "questions"."type" IN ('TrueFalseQuestion') AND (verified = 't') LIMIT 20) subquery_for_count [0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(count_column) FROM (SELECT 1 AS count_column FROM "questions" WHERE "questions"."type" IN ('MultipleChoiceQuestion') AND (verified = 't') LIMIT 20) subquery_for_count 
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT COUNT(count_column) FROM (SELECT 1 AS count_column FROM "questions" WHERE "questions"."type" IN ('TrueFalseQuestion') AND (verified = 't') LIMIT 20) subquery_for_count [0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT COUNT(count_column) FROM (SELECT 1 AS count_column FROM "questions" WHERE "questions"."type" IN ('MultipleChoiceQuestion') AND (verified = 't') LIMIT 20) subquery_for_count 
+  Rendered questions/test.html.haml within layouts/application (2.8ms)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1
+  Rendered shared/_flash.html.haml (0.1ms)
+Completed 200 OK in 14ms (Views: 12.0ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-09-19 10:42:34 -0700
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2012-09-19 10:42:34 -0700
+Served asset /bootstrap_and_overrides.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:34 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:34 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:34 -0700
+Served asset /bootstrap-transition.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:34 -0700
+Served asset /bootstrap-alert.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:34 -0700
+Served asset /bootstrap-button.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:34 -0700
+Served asset /bootstrap-carousel.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:34 -0700
+Served asset /bootstrap-collapse.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:34 -0700
+Served asset /bootstrap-dropdown.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:34 -0700
+Served asset /bootstrap-modal.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:34 -0700
+Served asset /bootstrap-scrollspy.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:34 -0700
+Served asset /bootstrap-tab.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:34 -0700
+Served asset /bootstrap-tooltip.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:34 -0700
+Served asset /bootstrap-popover.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:34 -0700
+Served asset /bootstrap-typeahead.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:34 -0700
+Served asset /bootstrap.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/exam.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:34 -0700
+Served asset /exam.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/options.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:34 -0700
+Served asset /options.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-09-19 10:42:34 -0700
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/print.css?body=1" for 127.0.0.1 at 2012-09-19 10:42:34 -0700
+Served asset /print.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/glyphicons-halflings-white.png" for 127.0.0.1 at 2012-09-19 10:42:35 -0700
+Served asset /glyphicons-halflings-white.png - 304 Not Modified (0ms)
+
+
+Started GET "/mockups/matching" for 127.0.0.1 at 2012-09-19 10:44:55 -0700
+Processing by MockupsController#matching as HTML
+  Rendered mockups/matching.html.haml within layouts/application (0.5ms)
+Creating scope :system. Overwriting existing method Option.system.
+  [1m[36mOption Load (0.1ms)[0m  [1mSELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1
+  Rendered shared/_flash.html.haml (0.1ms)
+Completed 200 OK in 20ms (Views: 19.0ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-09-19 10:44:55 -0700
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2012-09-19 10:44:55 -0700
+Served asset /bootstrap_and_overrides.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-09-19 10:44:55 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-09-19 10:44:55 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2012-09-19 10:44:55 -0700
+Served asset /bootstrap-transition.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2012-09-19 10:44:55 -0700
+Served asset /bootstrap-alert.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2012-09-19 10:44:55 -0700
+Served asset /bootstrap-button.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2012-09-19 10:44:55 -0700
+Served asset /bootstrap-carousel.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2012-09-19 10:44:55 -0700
+Served asset /bootstrap-collapse.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2012-09-19 10:44:55 -0700
+Served asset /bootstrap-dropdown.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2012-09-19 10:44:55 -0700
+Served asset /bootstrap-modal.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2012-09-19 10:44:55 -0700
+Served asset /bootstrap-scrollspy.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2012-09-19 10:44:55 -0700
+Served asset /bootstrap-tab.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2012-09-19 10:44:55 -0700
+Served asset /bootstrap-tooltip.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2012-09-19 10:44:55 -0700
+Served asset /bootstrap-popover.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2012-09-19 10:44:55 -0700
+Served asset /bootstrap-typeahead.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2012-09-19 10:44:55 -0700
+Served asset /bootstrap.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/exam.js?body=1" for 127.0.0.1 at 2012-09-19 10:44:55 -0700
+Served asset /exam.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/options.js?body=1" for 127.0.0.1 at 2012-09-19 10:44:55 -0700
+Served asset /options.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-09-19 10:44:55 -0700
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/print.css?body=1" for 127.0.0.1 at 2012-09-19 10:44:55 -0700
+Served asset /print.css - 304 Not Modified (0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2012-09-19 10:46:04 -0700
+Processing by QuestionsController#test as HTML
+  [1m[36mOption Load (0.1ms)[0m  [1mSELECT "options".* FROM "options" WHERE "options"."key" = 'true_false_questions_count' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1[0m
+  [1m[35mOption Load (0.1ms)[0m  SELECT "options".* FROM "options" WHERE "options"."key" = 'multi_choice_questions_count' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1
+  [1m[36mOption Load (0.1ms)[0m  [1mSELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(count_column) FROM (SELECT 1 AS count_column FROM "questions" WHERE "questions"."type" IN ('TrueFalseQuestion') AND (verified = 't') LIMIT 20) subquery_for_count 
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(count_column) FROM (SELECT 1 AS count_column FROM "questions" WHERE "questions"."type" IN ('MultipleChoiceQuestion') AND (verified = 't') LIMIT 20) subquery_for_count [0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT COUNT(count_column) FROM (SELECT 1 AS count_column FROM "questions" WHERE "questions"."type" IN ('TrueFalseQuestion') AND (verified = 't') LIMIT 20) subquery_for_count 
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT COUNT(count_column) FROM (SELECT 1 AS count_column FROM "questions" WHERE "questions"."type" IN ('MultipleChoiceQuestion') AND (verified = 't') LIMIT 20) subquery_for_count [0m
+  Rendered questions/test.html.haml within layouts/application (2.8ms)
+  [1m[35mCACHE (0.0ms)[0m  SELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1[0m
+  Rendered shared/_flash.html.haml (0.1ms)
+Completed 200 OK in 19ms (Views: 12.4ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-09-19 10:46:04 -0700
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2012-09-19 10:46:04 -0700
+Served asset /bootstrap_and_overrides.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-09-19 10:46:04 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-09-19 10:46:04 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2012-09-19 10:46:04 -0700
+Served asset /bootstrap-transition.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2012-09-19 10:46:04 -0700
+Served asset /bootstrap-alert.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2012-09-19 10:46:04 -0700
+Served asset /bootstrap-button.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2012-09-19 10:46:04 -0700
+Served asset /bootstrap-carousel.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2012-09-19 10:46:04 -0700
+Served asset /bootstrap-collapse.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2012-09-19 10:46:04 -0700
+Served asset /bootstrap-dropdown.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2012-09-19 10:46:04 -0700
+Served asset /bootstrap-modal.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2012-09-19 10:46:04 -0700
+Served asset /bootstrap-scrollspy.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2012-09-19 10:46:04 -0700
+Served asset /bootstrap-tab.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2012-09-19 10:46:04 -0700
+Served asset /bootstrap-tooltip.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2012-09-19 10:46:04 -0700
+Served asset /bootstrap-popover.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2012-09-19 10:46:04 -0700
+Served asset /bootstrap-typeahead.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2012-09-19 10:46:04 -0700
+Served asset /bootstrap.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/exam.js?body=1" for 127.0.0.1 at 2012-09-19 10:46:04 -0700
+Served asset /exam.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/options.js?body=1" for 127.0.0.1 at 2012-09-19 10:46:04 -0700
+Served asset /options.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-09-19 10:46:04 -0700
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/print.css?body=1" for 127.0.0.1 at 2012-09-19 10:46:04 -0700
+Served asset /print.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/glyphicons-halflings-white.png" for 127.0.0.1 at 2012-09-19 10:46:04 -0700
+Served asset /glyphicons-halflings-white.png - 304 Not Modified (0ms)
+
+
+Started GET "/questions/new" for 127.0.0.1 at 2012-09-19 10:46:05 -0700
+Processing by QuestionsController#new as HTML
+  Rendered questions/_form.html.haml (20.5ms)
+  Rendered questions/new.html.haml within layouts/application (21.8ms)
+  [1m[35mOption Load (0.2ms)[0m  SELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1[0m
+  Rendered shared/_flash.html.haml (0.1ms)
+Completed 200 OK in 67ms (Views: 59.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-09-19 10:46:05 -0700
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2012-09-19 10:46:05 -0700
+Served asset /bootstrap_and_overrides.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-09-19 10:46:05 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-09-19 10:46:05 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2012-09-19 10:46:05 -0700
+Served asset /bootstrap-transition.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2012-09-19 10:46:05 -0700
+Served asset /bootstrap-alert.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2012-09-19 10:46:05 -0700
+Served asset /bootstrap-button.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2012-09-19 10:46:05 -0700
+Served asset /bootstrap-carousel.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2012-09-19 10:46:05 -0700
+Served asset /bootstrap-collapse.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2012-09-19 10:46:05 -0700
+Served asset /bootstrap-dropdown.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2012-09-19 10:46:05 -0700
+Served asset /bootstrap-modal.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2012-09-19 10:46:05 -0700
+Served asset /bootstrap-scrollspy.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2012-09-19 10:46:05 -0700
+Served asset /bootstrap-tab.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2012-09-19 10:46:05 -0700
+Served asset /bootstrap-tooltip.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2012-09-19 10:46:05 -0700
+Served asset /bootstrap-popover.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2012-09-19 10:46:05 -0700
+Served asset /bootstrap-typeahead.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2012-09-19 10:46:05 -0700
+Served asset /bootstrap.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/exam.js?body=1" for 127.0.0.1 at 2012-09-19 10:46:05 -0700
+Served asset /exam.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/options.js?body=1" for 127.0.0.1 at 2012-09-19 10:46:05 -0700
+Served asset /options.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-09-19 10:46:05 -0700
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/print.css?body=1" for 127.0.0.1 at 2012-09-19 10:46:05 -0700
+Served asset /print.css - 304 Not Modified (0ms)
+
+
+Started GET "/mockups/matching" for 127.0.0.1 at 2012-09-19 10:51:58 -0700
+Processing by MockupsController#matching as HTML
+  Rendered mockups/matching.html.haml within layouts/application (1.4ms)
+Completed 500 Internal Server Error in 3ms
+
+ActionView::Template::Error (Illegal nesting: content can't be both given on the same line as %label and nested within it.):
+    10:       %label.control-label{for:"question_type"} Type
+    11:       .controls
+    12:         %label.radio{for:"question_type"}i
+    13:           %input{type: "radio"}
+    14:           Multiple Choice
+    15:                 /   <label class="radio" for="question_type"><input hide_block="#multi_choice_options" id="question_type_truefalsequestion" name="question[type]" show_block="#true_false_options" type="radio" value="TrueFalseQuestion" />True/False</label>
+    16:                 /   </div></div>
+  app/views/mockups/matching.html.haml:13
+
+
+  Rendered /Users/carlallen/.rvm/gems/ruby-1.9.3-p125/gems/actionpack-3.2.2/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.7ms)
+  Rendered /Users/carlallen/.rvm/gems/ruby-1.9.3-p125/gems/actionpack-3.2.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.7ms)
+  Rendered /Users/carlallen/.rvm/gems/ruby-1.9.3-p125/gems/actionpack-3.2.2/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (9.8ms)
+
+
+Started GET "/mockups/matching" for 127.0.0.1 at 2012-09-19 10:52:10 -0700
+Processing by MockupsController#matching as HTML
+  Rendered mockups/matching.html.haml within layouts/application (1.2ms)
+Completed 500 Internal Server Error in 3ms
+
+ActionView::Template::Error (Illegal nesting: content can't be both given on the same line as %label and nested within it.):
+    10:       %label.control-label{for:"question_type"} Type
+    11:       .controls
+    12:         %label.radio{for:"question_type"}i
+    13:           %input{type: "radio"}
+    14:           Multiple Choice
+    15: /   <label class="radio" for="question_type"><input hide_block="#multi_choice_options" id="question_type_truefalsequestion" name="question[type]" show_block="#true_false_options" type="radio" value="TrueFalseQuestion" />True/False</label>
+    16: /   </div></div>
+  app/views/mockups/matching.html.haml:13
+
+
+  Rendered /Users/carlallen/.rvm/gems/ruby-1.9.3-p125/gems/actionpack-3.2.2/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.7ms)
+  Rendered /Users/carlallen/.rvm/gems/ruby-1.9.3-p125/gems/actionpack-3.2.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.8ms)
+  Rendered /Users/carlallen/.rvm/gems/ruby-1.9.3-p125/gems/actionpack-3.2.2/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (8.9ms)
+
+
+Started GET "/mockups/matching" for 127.0.0.1 at 2012-09-19 10:52:16 -0700
+Processing by MockupsController#matching as HTML
+  Rendered mockups/matching.html.haml within layouts/application (1.3ms)
+Completed 500 Internal Server Error in 3ms
+
+ActionView::Template::Error (Illegal nesting: content can't be both given on the same line as %label and nested within it.):
+    10:       %label.control-label{for:"question_type"} Type
+    11:       .controls
+    12:         %label.radio{for:"question_type"}i
+    13:           %input{type: "radio"}
+    14:           Multiple Choice
+  app/views/mockups/matching.html.haml:13
+
+
+  Rendered /Users/carlallen/.rvm/gems/ruby-1.9.3-p125/gems/actionpack-3.2.2/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.8ms)
+  Rendered /Users/carlallen/.rvm/gems/ruby-1.9.3-p125/gems/actionpack-3.2.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.7ms)
+  Rendered /Users/carlallen/.rvm/gems/ruby-1.9.3-p125/gems/actionpack-3.2.2/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (8.8ms)
+
+
+Started GET "/mockups/matching" for 127.0.0.1 at 2012-09-19 10:52:25 -0700
+Processing by MockupsController#matching as HTML
+  Rendered mockups/matching.html.haml within layouts/application (3.9ms)
+  [1m[35mOption Load (0.2ms)[0m  SELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1[0m
+  Rendered shared/_flash.html.haml (0.1ms)
+Completed 200 OK in 15ms (Views: 14.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-09-19 10:52:25 -0700
+Served asset /application.css - 200 OK (1ms)
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2012-09-19 10:52:25 -0700
+Served asset /bootstrap_and_overrides.css - 200 OK (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-09-19 10:52:25 -0700
+Served asset /jquery.js - 200 OK (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-09-19 10:52:25 -0700
+Served asset /jquery_ujs.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2012-09-19 10:52:25 -0700
+Served asset /bootstrap-transition.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2012-09-19 10:52:25 -0700
+Served asset /bootstrap-alert.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2012-09-19 10:52:25 -0700
+Served asset /bootstrap-button.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2012-09-19 10:52:25 -0700
+Served asset /bootstrap-carousel.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2012-09-19 10:52:25 -0700
+Served asset /bootstrap-collapse.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2012-09-19 10:52:25 -0700
+Served asset /bootstrap-dropdown.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2012-09-19 10:52:25 -0700
+Served asset /bootstrap-modal.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2012-09-19 10:52:25 -0700
+Served asset /bootstrap-scrollspy.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2012-09-19 10:52:25 -0700
+Served asset /bootstrap-tab.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2012-09-19 10:52:25 -0700
+Served asset /bootstrap-tooltip.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2012-09-19 10:52:25 -0700
+Served asset /bootstrap-popover.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2012-09-19 10:52:25 -0700
+Served asset /bootstrap-typeahead.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2012-09-19 10:52:25 -0700
+Served asset /bootstrap.js - 200 OK (0ms)
+
+
+Started GET "/assets/options.js?body=1" for 127.0.0.1 at 2012-09-19 10:52:25 -0700
+Served asset /options.js - 200 OK (0ms)
+
+
+Started GET "/assets/exam.js?body=1" for 127.0.0.1 at 2012-09-19 10:52:25 -0700
+Served asset /exam.js - 200 OK (0ms)
+
+
+Started GET "/assets/print.css?body=1" for 127.0.0.1 at 2012-09-19 10:52:25 -0700
+Served asset /print.css - 200 OK (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-09-19 10:52:25 -0700
+Served asset /application.js - 200 OK (0ms)
+
+
+Started GET "/mockups/matching" for 127.0.0.1 at 2012-09-19 10:52:30 -0700
+Processing by MockupsController#matching as HTML
+  Rendered mockups/matching.html.haml within layouts/application (3.7ms)
+  [1m[35mOption Load (0.2ms)[0m  SELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1[0m
+  Rendered shared/_flash.html.haml (0.1ms)
+Completed 200 OK in 46ms (Views: 46.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-09-19 10:52:31 -0700
+Served asset /application.css - 200 OK (1ms)
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2012-09-19 10:52:31 -0700
+Served asset /bootstrap_and_overrides.css - 200 OK (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-09-19 10:52:31 -0700
+Served asset /jquery.js - 200 OK (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-09-19 10:52:31 -0700
+Served asset /jquery_ujs.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2012-09-19 10:52:31 -0700
+Served asset /bootstrap-transition.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2012-09-19 10:52:31 -0700
+Served asset /bootstrap-alert.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2012-09-19 10:52:31 -0700
+Served asset /bootstrap-button.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2012-09-19 10:52:31 -0700
+Served asset /bootstrap-carousel.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2012-09-19 10:52:31 -0700
+Served asset /bootstrap-collapse.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2012-09-19 10:52:31 -0700
+Served asset /bootstrap-dropdown.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2012-09-19 10:52:31 -0700
+Served asset /bootstrap-modal.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2012-09-19 10:52:31 -0700
+Served asset /bootstrap-scrollspy.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2012-09-19 10:52:31 -0700
+Served asset /bootstrap-tab.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2012-09-19 10:52:31 -0700
+Served asset /bootstrap-tooltip.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2012-09-19 10:52:31 -0700
+Served asset /bootstrap-popover.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2012-09-19 10:52:31 -0700
+Served asset /bootstrap-typeahead.js - 200 OK (0ms)
+
+
+Started GET "/assets/exam.js?body=1" for 127.0.0.1 at 2012-09-19 10:52:31 -0700
+Served asset /exam.js - 200 OK (0ms)
+
+
+Started GET "/assets/options.js?body=1" for 127.0.0.1 at 2012-09-19 10:52:31 -0700
+Served asset /options.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2012-09-19 10:52:31 -0700
+Served asset /bootstrap.js - 200 OK (0ms)
+
+
+Started GET "/assets/print.css?body=1" for 127.0.0.1 at 2012-09-19 10:52:31 -0700
+Served asset /print.css - 200 OK (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-09-19 10:52:31 -0700
+Served asset /application.js - 200 OK (0ms)
+
+
+Started GET "/mockups/matching" for 127.0.0.1 at 2012-09-19 10:53:00 -0700
+Processing by MockupsController#matching as HTML
+  Rendered mockups/matching.html.haml within layouts/application (4.5ms)
+  [1m[35mOption Load (0.2ms)[0m  SELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1[0m
+  Rendered shared/_flash.html.haml (0.1ms)
+Completed 200 OK in 15ms (Views: 14.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-09-19 10:53:00 -0700
+Served asset /application.css - 200 OK (1ms)
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2012-09-19 10:53:00 -0700
+Served asset /bootstrap_and_overrides.css - 200 OK (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-09-19 10:53:00 -0700
+Served asset /jquery.js - 200 OK (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-09-19 10:53:00 -0700
+Served asset /jquery_ujs.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2012-09-19 10:53:00 -0700
+Served asset /bootstrap-transition.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2012-09-19 10:53:00 -0700
+Served asset /bootstrap-alert.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2012-09-19 10:53:00 -0700
+Served asset /bootstrap-button.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2012-09-19 10:53:00 -0700
+Served asset /bootstrap-carousel.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2012-09-19 10:53:00 -0700
+Served asset /bootstrap-collapse.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2012-09-19 10:53:00 -0700
+Served asset /bootstrap-tab.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2012-09-19 10:53:00 -0700
+Served asset /bootstrap-dropdown.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2012-09-19 10:53:00 -0700
+Served asset /bootstrap-modal.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2012-09-19 10:53:00 -0700
+Served asset /bootstrap-scrollspy.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2012-09-19 10:53:00 -0700
+Served asset /bootstrap-tooltip.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2012-09-19 10:53:00 -0700
+Served asset /bootstrap-popover.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2012-09-19 10:53:00 -0700
+Served asset /bootstrap-typeahead.js - 200 OK (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-09-19 10:53:00 -0700
+Served asset /application.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2012-09-19 10:53:00 -0700
+Served asset /bootstrap.js - 200 OK (0ms)
+
+
+Started GET "/assets/exam.js?body=1" for 127.0.0.1 at 2012-09-19 10:53:00 -0700
+Served asset /exam.js - 200 OK (0ms)
+
+
+Started GET "/assets/options.js?body=1" for 127.0.0.1 at 2012-09-19 10:53:00 -0700
+Served asset /options.js - 200 OK (0ms)
+
+
+Started GET "/assets/print.css?body=1" for 127.0.0.1 at 2012-09-19 10:53:00 -0700
+Served asset /print.css - 200 OK (0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2012-09-19 10:54:19 -0700
+Processing by QuestionsController#test as HTML
+  [1m[35mOption Load (0.1ms)[0m  SELECT "options".* FROM "options" WHERE "options"."key" = 'true_false_questions_count' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1
+  [1m[36mOption Load (0.2ms)[0m  [1mSELECT "options".* FROM "options" WHERE "options"."key" = 'multi_choice_questions_count' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1[0m
+  [1m[35mOption Load (0.1ms)[0m  SELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(count_column) FROM (SELECT 1 AS count_column FROM "questions" WHERE "questions"."type" IN ('TrueFalseQuestion') AND (verified = 't') LIMIT 20) subquery_for_count [0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(count_column) FROM (SELECT 1 AS count_column FROM "questions" WHERE "questions"."type" IN ('MultipleChoiceQuestion') AND (verified = 't') LIMIT 20) subquery_for_count 
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT COUNT(count_column) FROM (SELECT 1 AS count_column FROM "questions" WHERE "questions"."type" IN ('TrueFalseQuestion') AND (verified = 't') LIMIT 20) subquery_for_count [0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT COUNT(count_column) FROM (SELECT 1 AS count_column FROM "questions" WHERE "questions"."type" IN ('MultipleChoiceQuestion') AND (verified = 't') LIMIT 20) subquery_for_count 
+  Rendered questions/test.html.haml within layouts/application (2.6ms)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1
+  Rendered shared/_flash.html.haml (0.1ms)
+Completed 200 OK in 14ms (Views: 11.9ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-09-19 10:54:19 -0700
+Served asset /application.css - 200 OK (2ms)
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2012-09-19 10:54:19 -0700
+Served asset /bootstrap_and_overrides.css - 200 OK (2ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:19 -0700
+Served asset /jquery.js - 200 OK (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:19 -0700
+Served asset /jquery_ujs.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:19 -0700
+Served asset /bootstrap-transition.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:19 -0700
+Served asset /bootstrap-alert.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:19 -0700
+Served asset /bootstrap-button.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:19 -0700
+Served asset /bootstrap-carousel.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:19 -0700
+Served asset /bootstrap-collapse.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:19 -0700
+Served asset /bootstrap-dropdown.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:19 -0700
+Served asset /bootstrap-modal.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:19 -0700
+Served asset /bootstrap-scrollspy.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:19 -0700
+Served asset /bootstrap-tab.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:19 -0700
+Served asset /bootstrap-tooltip.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:19 -0700
+Served asset /bootstrap-popover.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:19 -0700
+Served asset /bootstrap-typeahead.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:19 -0700
+Served asset /bootstrap.js - 200 OK (0ms)
+
+
+Started GET "/assets/exam.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:19 -0700
+Served asset /exam.js - 200 OK (0ms)
+
+
+Started GET "/assets/options.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:19 -0700
+Served asset /options.js - 200 OK (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:19 -0700
+Served asset /application.js - 200 OK (0ms)
+
+
+Started GET "/assets/print.css?body=1" for 127.0.0.1 at 2012-09-19 10:54:19 -0700
+Served asset /print.css - 200 OK (0ms)
+
+
+Started GET "/assets/glyphicons-halflings-white.png" for 127.0.0.1 at 2012-09-19 10:54:19 -0700
+Served asset /glyphicons-halflings-white.png - 200 OK (0ms)
+
+
+Started GET "/questions/new" for 127.0.0.1 at 2012-09-19 10:54:22 -0700
+Processing by QuestionsController#new as HTML
+  Rendered questions/_form.html.haml (50.2ms)
+  Rendered questions/new.html.haml within layouts/application (50.8ms)
+  [1m[36mOption Load (0.2ms)[0m  [1mSELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1
+  Rendered shared/_flash.html.haml (0.1ms)
+Completed 200 OK in 61ms (Views: 60.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-09-19 10:54:22 -0700
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2012-09-19 10:54:22 -0700
+Served asset /bootstrap_and_overrides.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:22 -0700
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:22 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:22 -0700
+Served asset /bootstrap-transition.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:22 -0700
+Served asset /bootstrap-alert.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:22 -0700
+Served asset /bootstrap-button.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:22 -0700
+Served asset /bootstrap-carousel.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:22 -0700
+Served asset /bootstrap-collapse.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:22 -0700
+Served asset /bootstrap-dropdown.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:22 -0700
+Served asset /bootstrap-modal.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:22 -0700
+Served asset /bootstrap-scrollspy.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:22 -0700
+Served asset /bootstrap-tab.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:22 -0700
+Served asset /bootstrap-tooltip.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:22 -0700
+Served asset /bootstrap-popover.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:22 -0700
+Served asset /bootstrap-typeahead.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:22 -0700
+Served asset /bootstrap.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/exam.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:22 -0700
+Served asset /exam.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/options.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:22 -0700
+Served asset /options.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:22 -0700
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/print.css?body=1" for 127.0.0.1 at 2012-09-19 10:54:22 -0700
+Served asset /print.css - 304 Not Modified (0ms)
+
+
+Started GET "/mockups/matching" for 127.0.0.1 at 2012-09-19 10:54:54 -0700
+Processing by MockupsController#matching as HTML
+  Rendered mockups/matching.html.haml within layouts/application (3.6ms)
+  [1m[36mOption Load (0.1ms)[0m  [1mSELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1
+  Rendered shared/_flash.html.haml (0.1ms)
+Completed 200 OK in 13ms (Views: 13.2ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-09-19 10:54:54 -0700
+Served asset /application.css - 200 OK (1ms)
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2012-09-19 10:54:54 -0700
+Served asset /bootstrap_and_overrides.css - 200 OK (32ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:54 -0700
+Served asset /jquery.js - 200 OK (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:54 -0700
+Served asset /jquery_ujs.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:54 -0700
+Served asset /bootstrap-transition.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:54 -0700
+Served asset /bootstrap-alert.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:54 -0700
+Served asset /bootstrap-button.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:54 -0700
+Served asset /bootstrap-carousel.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:54 -0700
+Served asset /bootstrap-scrollspy.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:54 -0700
+Served asset /bootstrap-tab.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:54 -0700
+Served asset /bootstrap-collapse.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:54 -0700
+Served asset /bootstrap-dropdown.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:54 -0700
+Served asset /bootstrap-modal.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:54 -0700
+Served asset /bootstrap-tooltip.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:54 -0700
+Served asset /bootstrap-popover.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:54 -0700
+Served asset /bootstrap.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:54 -0700
+Served asset /bootstrap-typeahead.js - 200 OK (0ms)
+
+
+Started GET "/assets/exam.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:54 -0700
+Served asset /exam.js - 200 OK (0ms)
+
+
+Started GET "/assets/options.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:54 -0700
+Served asset /options.js - 200 OK (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-09-19 10:54:54 -0700
+Served asset /application.js - 200 OK (0ms)
+
+
+Started GET "/assets/print.css?body=1" for 127.0.0.1 at 2012-09-19 10:54:54 -0700
+Served asset /print.css - 200 OK (0ms)
+
+
+Started GET "/mockups/matching" for 127.0.0.1 at 2012-09-19 10:55:21 -0700
+Processing by MockupsController#matching as HTML
+  Rendered mockups/matching.html.haml within layouts/application (4.3ms)
+  [1m[36mOption Load (0.2ms)[0m  [1mSELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1
+  Rendered shared/_flash.html.haml (0.1ms)
+Completed 200 OK in 15ms (Views: 14.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-09-19 10:55:21 -0700
+Served asset /application.css - 200 OK (1ms)
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2012-09-19 10:55:21 -0700
+Served asset /bootstrap_and_overrides.css - 200 OK (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:21 -0700
+Served asset /jquery.js - 200 OK (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:21 -0700
+Served asset /jquery_ujs.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:21 -0700
+Served asset /bootstrap-transition.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:21 -0700
+Served asset /bootstrap-alert.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:21 -0700
+Served asset /bootstrap-button.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:21 -0700
+Served asset /bootstrap-carousel.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:21 -0700
+Served asset /bootstrap-scrollspy.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:21 -0700
+Served asset /bootstrap-tab.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:21 -0700
+Served asset /bootstrap-collapse.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:21 -0700
+Served asset /bootstrap-dropdown.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:21 -0700
+Served asset /bootstrap-modal.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:21 -0700
+Served asset /bootstrap-tooltip.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:21 -0700
+Served asset /bootstrap-popover.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:21 -0700
+Served asset /bootstrap.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:21 -0700
+Served asset /bootstrap-typeahead.js - 200 OK (0ms)
+
+
+Started GET "/assets/exam.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:21 -0700
+Served asset /exam.js - 200 OK (0ms)
+
+
+Started GET "/assets/options.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:21 -0700
+Served asset /options.js - 200 OK (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:21 -0700
+Served asset /application.js - 200 OK (0ms)
+
+
+Started GET "/assets/print.css?body=1" for 127.0.0.1 at 2012-09-19 10:55:21 -0700
+Served asset /print.css - 200 OK (0ms)
+
+
+Started GET "/mockups/matching" for 127.0.0.1 at 2012-09-19 10:55:28 -0700
+Processing by MockupsController#matching as HTML
+  Rendered mockups/matching.html.haml within layouts/application (4.3ms)
+  [1m[36mOption Load (0.2ms)[0m  [1mSELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1
+  Rendered shared/_flash.html.haml (0.1ms)
+Completed 200 OK in 15ms (Views: 14.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-09-19 10:55:28 -0700
+Served asset /application.css - 200 OK (1ms)
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2012-09-19 10:55:28 -0700
+Served asset /bootstrap_and_overrides.css - 200 OK (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:28 -0700
+Served asset /jquery.js - 200 OK (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:28 -0700
+Served asset /jquery_ujs.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:28 -0700
+Served asset /bootstrap-transition.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:28 -0700
+Served asset /bootstrap-alert.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:28 -0700
+Served asset /bootstrap-button.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:28 -0700
+Served asset /bootstrap-carousel.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:28 -0700
+Served asset /bootstrap-scrollspy.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:28 -0700
+Served asset /bootstrap-tab.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:28 -0700
+Served asset /bootstrap-collapse.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:28 -0700
+Served asset /bootstrap-dropdown.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:28 -0700
+Served asset /bootstrap-modal.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:28 -0700
+Served asset /bootstrap-tooltip.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:28 -0700
+Served asset /bootstrap-popover.js - 200 OK (0ms)
+
+
+Started GET "/assets/options.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:28 -0700
+Served asset /options.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:28 -0700
+Served asset /bootstrap.js - 200 OK (0ms)
+
+
+Started GET "/assets/exam.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:28 -0700
+Served asset /exam.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:28 -0700
+Served asset /bootstrap-typeahead.js - 200 OK (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:28 -0700
+Served asset /application.js - 200 OK (0ms)
+
+
+Started GET "/assets/print.css?body=1" for 127.0.0.1 at 2012-09-19 10:55:28 -0700
+Served asset /print.css - 200 OK (0ms)
+
+
+Started GET "/mockups/matching" for 127.0.0.1 at 2012-09-19 10:55:47 -0700
+Processing by MockupsController#matching as HTML
+  Rendered mockups/matching.html.haml within layouts/application (4.6ms)
+  [1m[36mOption Load (0.2ms)[0m  [1mSELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1
+  Rendered shared/_flash.html.haml (0.1ms)
+Completed 200 OK in 16ms (Views: 16.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-09-19 10:55:47 -0700
+Served asset /application.css - 200 OK (1ms)
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2012-09-19 10:55:47 -0700
+Served asset /bootstrap_and_overrides.css - 200 OK (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:47 -0700
+Served asset /jquery.js - 200 OK (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:47 -0700
+Served asset /jquery_ujs.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:47 -0700
+Served asset /bootstrap-transition.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:47 -0700
+Served asset /bootstrap-alert.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:47 -0700
+Served asset /bootstrap-button.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:47 -0700
+Served asset /bootstrap-carousel.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:47 -0700
+Served asset /bootstrap-collapse.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:47 -0700
+Served asset /bootstrap-tab.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:47 -0700
+Served asset /bootstrap-dropdown.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:47 -0700
+Served asset /bootstrap-modal.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:47 -0700
+Served asset /bootstrap-scrollspy.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:47 -0700
+Served asset /bootstrap-tooltip.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:47 -0700
+Served asset /bootstrap-popover.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:47 -0700
+Served asset /bootstrap.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:47 -0700
+Served asset /bootstrap-typeahead.js - 200 OK (0ms)
+
+
+Started GET "/assets/exam.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:47 -0700
+Served asset /exam.js - 200 OK (0ms)
+
+
+Started GET "/assets/options.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:47 -0700
+Served asset /options.js - 200 OK (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:47 -0700
+Served asset /application.js - 200 OK (0ms)
+
+
+Started GET "/assets/print.css?body=1" for 127.0.0.1 at 2012-09-19 10:55:47 -0700
+Served asset /print.css - 200 OK (0ms)
+
+
+Started GET "/assets/glyphicons-halflings.png" for 127.0.0.1 at 2012-09-19 10:55:47 -0700
+Served asset /glyphicons-halflings.png - 200 OK (4ms)
+
+
+Started GET "/mockups/matching" for 127.0.0.1 at 2012-09-19 10:55:55 -0700
+Processing by MockupsController#matching as HTML
+  Rendered mockups/matching.html.haml within layouts/application (4.7ms)
+  [1m[36mOption Load (0.2ms)[0m  [1mSELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1
+  Rendered shared/_flash.html.haml (0.1ms)
+Completed 200 OK in 15ms (Views: 14.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-09-19 10:55:55 -0700
+Served asset /application.css - 200 OK (1ms)
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2012-09-19 10:55:55 -0700
+Served asset /bootstrap_and_overrides.css - 200 OK (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:55 -0700
+Served asset /jquery.js - 200 OK (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:55 -0700
+Served asset /jquery_ujs.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:55 -0700
+Served asset /bootstrap-transition.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:55 -0700
+Served asset /bootstrap-alert.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:55 -0700
+Served asset /bootstrap-button.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:55 -0700
+Served asset /bootstrap-carousel.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:55 -0700
+Served asset /bootstrap-scrollspy.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:55 -0700
+Served asset /bootstrap-tab.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:55 -0700
+Served asset /bootstrap-collapse.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:55 -0700
+Served asset /bootstrap-dropdown.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:55 -0700
+Served asset /bootstrap-modal.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:55 -0700
+Served asset /bootstrap-tooltip.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:55 -0700
+Served asset /bootstrap-popover.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:55 -0700
+Served asset /bootstrap.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:55 -0700
+Served asset /bootstrap-typeahead.js - 200 OK (0ms)
+
+
+Started GET "/assets/exam.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:55 -0700
+Served asset /exam.js - 200 OK (0ms)
+
+
+Started GET "/assets/options.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:55 -0700
+Served asset /options.js - 200 OK (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-09-19 10:55:55 -0700
+Served asset /application.js - 200 OK (0ms)
+
+
+Started GET "/assets/print.css?body=1" for 127.0.0.1 at 2012-09-19 10:55:55 -0700
+Served asset /print.css - 200 OK (0ms)
+
+
+Started GET "/assets/glyphicons-halflings.png" for 127.0.0.1 at 2012-09-19 10:55:55 -0700
+Served asset /glyphicons-halflings.png - 200 OK (0ms)
+
+
+Started GET "/mockups/matching" for 127.0.0.1 at 2012-09-19 10:56:09 -0700
+Processing by MockupsController#matching as HTML
+  Rendered mockups/matching.html.haml within layouts/application (4.6ms)
+  [1m[36mOption Load (0.2ms)[0m  [1mSELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1
+  Rendered shared/_flash.html.haml (0.1ms)
+Completed 200 OK in 15ms (Views: 14.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-09-19 10:56:09 -0700
+Served asset /application.css - 200 OK (1ms)
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2012-09-19 10:56:09 -0700
+Served asset /bootstrap_and_overrides.css - 200 OK (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:09 -0700
+Served asset /jquery.js - 200 OK (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:09 -0700
+Served asset /jquery_ujs.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:09 -0700
+Served asset /bootstrap-transition.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:09 -0700
+Served asset /bootstrap-alert.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:09 -0700
+Served asset /bootstrap-button.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:09 -0700
+Served asset /bootstrap-carousel.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:09 -0700
+Served asset /bootstrap-collapse.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:09 -0700
+Served asset /bootstrap-tab.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:09 -0700
+Served asset /bootstrap-dropdown.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:09 -0700
+Served asset /bootstrap-modal.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:09 -0700
+Served asset /bootstrap-scrollspy.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:09 -0700
+Served asset /bootstrap-tooltip.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:09 -0700
+Served asset /bootstrap-popover.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:09 -0700
+Served asset /bootstrap-typeahead.js - 200 OK (0ms)
+
+
+Started GET "/assets/options.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:09 -0700
+Served asset /options.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:09 -0700
+Served asset /bootstrap.js - 200 OK (0ms)
+
+
+Started GET "/assets/exam.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:09 -0700
+Served asset /exam.js - 200 OK (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:09 -0700
+Served asset /application.js - 200 OK (0ms)
+
+
+Started GET "/assets/print.css?body=1" for 127.0.0.1 at 2012-09-19 10:56:09 -0700
+Served asset /print.css - 200 OK (0ms)
+
+
+Started GET "/assets/glyphicons-halflings.png" for 127.0.0.1 at 2012-09-19 10:56:09 -0700
+Served asset /glyphicons-halflings.png - 200 OK (0ms)
+
+
+Started GET "/mockups/matching" for 127.0.0.1 at 2012-09-19 10:56:37 -0700
+Processing by MockupsController#matching as HTML
+  Rendered mockups/matching.html.haml within layouts/application (4.7ms)
+  [1m[36mOption Load (0.2ms)[0m  [1mSELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1
+  Rendered shared/_flash.html.haml (0.1ms)
+Completed 200 OK in 15ms (Views: 14.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-09-19 10:56:38 -0700
+Served asset /application.css - 200 OK (1ms)
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2012-09-19 10:56:38 -0700
+Served asset /bootstrap_and_overrides.css - 200 OK (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:38 -0700
+Served asset /jquery.js - 200 OK (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:38 -0700
+Served asset /jquery_ujs.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:38 -0700
+Served asset /bootstrap-transition.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:38 -0700
+Served asset /bootstrap-alert.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:38 -0700
+Served asset /bootstrap-button.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:38 -0700
+Served asset /bootstrap-carousel.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:38 -0700
+Served asset /bootstrap-collapse.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:38 -0700
+Served asset /bootstrap-dropdown.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:38 -0700
+Served asset /bootstrap-modal.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:38 -0700
+Served asset /bootstrap-scrollspy.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:38 -0700
+Served asset /bootstrap-tab.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:38 -0700
+Served asset /bootstrap-tooltip.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:38 -0700
+Served asset /bootstrap-popover.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:38 -0700
+Served asset /bootstrap-typeahead.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:38 -0700
+Served asset /bootstrap.js - 200 OK (0ms)
+
+
+Started GET "/assets/options.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:38 -0700
+Served asset /options.js - 200 OK (0ms)
+
+
+Started GET "/assets/exam.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:38 -0700
+Served asset /exam.js - 200 OK (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:38 -0700
+Served asset /application.js - 200 OK (0ms)
+
+
+Started GET "/assets/print.css?body=1" for 127.0.0.1 at 2012-09-19 10:56:38 -0700
+Served asset /print.css - 200 OK (0ms)
+
+
+Started GET "/assets/glyphicons-halflings.png" for 127.0.0.1 at 2012-09-19 10:56:38 -0700
+Served asset /glyphicons-halflings.png - 200 OK (0ms)
+
+
+Started GET "/mockups/matching" for 127.0.0.1 at 2012-09-19 10:56:42 -0700
+Processing by MockupsController#matching as HTML
+  Rendered mockups/matching.html.haml within layouts/application (4.8ms)
+  [1m[36mOption Load (0.2ms)[0m  [1mSELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1
+  Rendered shared/_flash.html.haml (0.1ms)
+Completed 200 OK in 15ms (Views: 15.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-09-19 10:56:42 -0700
+Served asset /application.css - 200 OK (1ms)
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2012-09-19 10:56:42 -0700
+Served asset /bootstrap_and_overrides.css - 200 OK (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:42 -0700
+Served asset /jquery.js - 200 OK (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:42 -0700
+Served asset /jquery_ujs.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:42 -0700
+Served asset /bootstrap-transition.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:42 -0700
+Served asset /bootstrap-alert.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:42 -0700
+Served asset /bootstrap-button.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:42 -0700
+Served asset /bootstrap-carousel.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:42 -0700
+Served asset /bootstrap-collapse.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:42 -0700
+Served asset /bootstrap-dropdown.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:42 -0700
+Served asset /bootstrap-modal.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:42 -0700
+Served asset /bootstrap-scrollspy.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:42 -0700
+Served asset /bootstrap-tab.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:42 -0700
+Served asset /bootstrap-tooltip.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:42 -0700
+Served asset /bootstrap-popover.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:42 -0700
+Served asset /bootstrap-typeahead.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:42 -0700
+Served asset /bootstrap.js - 200 OK (0ms)
+
+
+Started GET "/assets/options.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:42 -0700
+Served asset /options.js - 200 OK (0ms)
+
+
+Started GET "/assets/exam.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:42 -0700
+Served asset /exam.js - 200 OK (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:42 -0700
+Served asset /application.js - 200 OK (0ms)
+
+
+Started GET "/assets/print.css?body=1" for 127.0.0.1 at 2012-09-19 10:56:42 -0700
+Served asset /print.css - 200 OK (0ms)
+
+
+Started GET "/assets/glyphicons-halflings.png" for 127.0.0.1 at 2012-09-19 10:56:42 -0700
+Served asset /glyphicons-halflings.png - 200 OK (0ms)
+
+
+Started GET "/mockups/matching" for 127.0.0.1 at 2012-09-19 10:56:54 -0700
+Processing by MockupsController#matching as HTML
+  Rendered mockups/matching.html.haml within layouts/application (4.9ms)
+  [1m[36mOption Load (0.2ms)[0m  [1mSELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1
+  Rendered shared/_flash.html.haml (0.1ms)
+Completed 200 OK in 16ms (Views: 15.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-09-19 10:56:54 -0700
+Served asset /application.css - 200 OK (1ms)
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2012-09-19 10:56:54 -0700
+Served asset /bootstrap_and_overrides.css - 200 OK (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:54 -0700
+Served asset /jquery.js - 200 OK (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:54 -0700
+Served asset /jquery_ujs.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:54 -0700
+Served asset /bootstrap-transition.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:54 -0700
+Served asset /bootstrap-alert.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:54 -0700
+Served asset /bootstrap-button.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:54 -0700
+Served asset /bootstrap-carousel.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:54 -0700
+Served asset /bootstrap-collapse.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:54 -0700
+Served asset /bootstrap-dropdown.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:54 -0700
+Served asset /bootstrap-modal.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:54 -0700
+Served asset /bootstrap-scrollspy.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:54 -0700
+Served asset /bootstrap-tooltip.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:54 -0700
+Served asset /bootstrap-tab.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:54 -0700
+Served asset /bootstrap-popover.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:54 -0700
+Served asset /bootstrap-typeahead.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:54 -0700
+Served asset /bootstrap.js - 200 OK (0ms)
+
+
+Started GET "/assets/exam.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:54 -0700
+Served asset /exam.js - 200 OK (0ms)
+
+
+Started GET "/assets/print.css?body=1" for 127.0.0.1 at 2012-09-19 10:56:54 -0700
+Served asset /print.css - 200 OK (0ms)
+
+
+Started GET "/assets/options.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:54 -0700
+Served asset /options.js - 200 OK (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-09-19 10:56:54 -0700
+Served asset /application.js - 200 OK (0ms)
+
+
+Started GET "/assets/glyphicons-halflings.png" for 127.0.0.1 at 2012-09-19 10:56:55 -0700
+Served asset /glyphicons-halflings.png - 200 OK (0ms)
+
+
+Started GET "/mockups/matching" for 127.0.0.1 at 2012-09-19 10:57:10 -0700
+Processing by MockupsController#matching as HTML
+  Rendered mockups/matching.html.haml within layouts/application (5.4ms)
+  [1m[36mOption Load (0.2ms)[0m  [1mSELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1
+  Rendered shared/_flash.html.haml (0.1ms)
+Completed 200 OK in 16ms (Views: 15.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-09-19 10:57:10 -0700
+Served asset /application.css - 200 OK (1ms)
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2012-09-19 10:57:10 -0700
+Served asset /bootstrap_and_overrides.css - 200 OK (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:10 -0700
+Served asset /jquery.js - 200 OK (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:10 -0700
+Served asset /jquery_ujs.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:10 -0700
+Served asset /bootstrap-transition.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:10 -0700
+Served asset /bootstrap-alert.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:10 -0700
+Served asset /bootstrap-button.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:10 -0700
+Served asset /bootstrap-carousel.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:10 -0700
+Served asset /bootstrap-scrollspy.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:10 -0700
+Served asset /bootstrap-tab.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:10 -0700
+Served asset /bootstrap-collapse.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:10 -0700
+Served asset /bootstrap-dropdown.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:10 -0700
+Served asset /bootstrap-modal.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:10 -0700
+Served asset /bootstrap-tooltip.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:10 -0700
+Served asset /bootstrap-popover.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:10 -0700
+Served asset /bootstrap-typeahead.js - 200 OK (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:10 -0700
+Served asset /application.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:10 -0700
+Served asset /bootstrap.js - 200 OK (0ms)
+
+
+Started GET "/assets/exam.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:10 -0700
+Served asset /exam.js - 200 OK (0ms)
+
+
+Started GET "/assets/options.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:10 -0700
+Served asset /options.js - 200 OK (0ms)
+
+
+Started GET "/assets/print.css?body=1" for 127.0.0.1 at 2012-09-19 10:57:10 -0700
+Served asset /print.css - 200 OK (0ms)
+
+
+Started GET "/assets/glyphicons-halflings.png" for 127.0.0.1 at 2012-09-19 10:57:11 -0700
+Served asset /glyphicons-halflings.png - 200 OK (0ms)
+
+
+Started GET "/mockups/matching" for 127.0.0.1 at 2012-09-19 10:57:16 -0700
+Processing by MockupsController#matching as HTML
+  Rendered mockups/matching.html.haml within layouts/application (4.8ms)
+  [1m[36mOption Load (0.2ms)[0m  [1mSELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1
+  Rendered shared/_flash.html.haml (0.1ms)
+Completed 200 OK in 51ms (Views: 50.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-09-19 10:57:16 -0700
+Served asset /application.css - 200 OK (1ms)
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2012-09-19 10:57:16 -0700
+Served asset /bootstrap_and_overrides.css - 200 OK (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:16 -0700
+Served asset /jquery.js - 200 OK (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:16 -0700
+Served asset /jquery_ujs.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:16 -0700
+Served asset /bootstrap-transition.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:16 -0700
+Served asset /bootstrap-alert.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:16 -0700
+Served asset /bootstrap-button.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:16 -0700
+Served asset /bootstrap-carousel.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:16 -0700
+Served asset /bootstrap-scrollspy.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:16 -0700
+Served asset /bootstrap-tab.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:16 -0700
+Served asset /bootstrap-collapse.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:16 -0700
+Served asset /bootstrap-dropdown.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:16 -0700
+Served asset /bootstrap-modal.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:16 -0700
+Served asset /bootstrap-tooltip.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:16 -0700
+Served asset /bootstrap-popover.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:16 -0700
+Served asset /bootstrap.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:16 -0700
+Served asset /bootstrap-typeahead.js - 200 OK (0ms)
+
+
+Started GET "/assets/exam.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:16 -0700
+Served asset /exam.js - 200 OK (0ms)
+
+
+Started GET "/assets/options.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:16 -0700
+Served asset /options.js - 200 OK (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:16 -0700
+Served asset /application.js - 200 OK (0ms)
+
+
+Started GET "/assets/print.css?body=1" for 127.0.0.1 at 2012-09-19 10:57:16 -0700
+Served asset /print.css - 200 OK (0ms)
+
+
+Started GET "/assets/glyphicons-halflings.png" for 127.0.0.1 at 2012-09-19 10:57:16 -0700
+Served asset /glyphicons-halflings.png - 200 OK (0ms)
+
+
+Started GET "/mockups/matching" for 127.0.0.1 at 2012-09-19 10:57:21 -0700
+Processing by MockupsController#matching as HTML
+  Rendered mockups/matching.html.haml within layouts/application (4.9ms)
+  [1m[36mOption Load (0.2ms)[0m  [1mSELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1
+  Rendered shared/_flash.html.haml (0.1ms)
+Completed 200 OK in 16ms (Views: 15.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-09-19 10:57:22 -0700
+Served asset /application.css - 200 OK (1ms)
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2012-09-19 10:57:22 -0700
+Served asset /bootstrap_and_overrides.css - 200 OK (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:22 -0700
+Served asset /jquery.js - 200 OK (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:22 -0700
+Served asset /jquery_ujs.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:22 -0700
+Served asset /bootstrap-transition.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:22 -0700
+Served asset /bootstrap-alert.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:22 -0700
+Served asset /bootstrap-button.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:22 -0700
+Served asset /bootstrap-carousel.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:22 -0700
+Served asset /bootstrap-collapse.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:22 -0700
+Served asset /bootstrap-tab.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:22 -0700
+Served asset /bootstrap-dropdown.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:22 -0700
+Served asset /bootstrap-modal.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:22 -0700
+Served asset /bootstrap-scrollspy.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:22 -0700
+Served asset /bootstrap-tooltip.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:22 -0700
+Served asset /bootstrap-popover.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:22 -0700
+Served asset /bootstrap.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:22 -0700
+Served asset /bootstrap-typeahead.js - 200 OK (0ms)
+
+
+Started GET "/assets/exam.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:22 -0700
+Served asset /exam.js - 200 OK (0ms)
+
+
+Started GET "/assets/options.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:22 -0700
+Served asset /options.js - 200 OK (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:22 -0700
+Served asset /application.js - 200 OK (0ms)
+
+
+Started GET "/assets/print.css?body=1" for 127.0.0.1 at 2012-09-19 10:57:22 -0700
+Served asset /print.css - 200 OK (0ms)
+
+
+Started GET "/assets/glyphicons-halflings.png" for 127.0.0.1 at 2012-09-19 10:57:22 -0700
+Served asset /glyphicons-halflings.png - 200 OK (0ms)
+
+
+Started GET "/mockups/matching" for 127.0.0.1 at 2012-09-19 10:57:27 -0700
+Processing by MockupsController#matching as HTML
+  Rendered mockups/matching.html.haml within layouts/application (4.6ms)
+  [1m[36mOption Load (0.2ms)[0m  [1mSELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "options".* FROM "options" WHERE "options"."key" = 'test_title' AND (model_id IS NULL AND model_type IS NULL) LIMIT 1
+  Rendered shared/_flash.html.haml (0.1ms)
+Completed 200 OK in 15ms (Views: 15.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-09-19 10:57:27 -0700
+Served asset /application.css - 200 OK (1ms)
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2012-09-19 10:57:27 -0700
+Served asset /bootstrap_and_overrides.css - 200 OK (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:27 -0700
+Served asset /jquery.js - 200 OK (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:27 -0700
+Served asset /jquery_ujs.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:27 -0700
+Served asset /bootstrap-transition.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:27 -0700
+Served asset /bootstrap-alert.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:27 -0700
+Served asset /bootstrap-button.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:27 -0700
+Served asset /bootstrap-carousel.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:27 -0700
+Served asset /bootstrap-collapse.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:27 -0700
+Served asset /bootstrap-dropdown.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:27 -0700
+Served asset /bootstrap-modal.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:27 -0700
+Served asset /bootstrap-scrollspy.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:27 -0700
+Served asset /bootstrap-tab.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:27 -0700
+Served asset /bootstrap-tooltip.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:27 -0700
+Served asset /bootstrap-popover.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:27 -0700
+Served asset /bootstrap.js - 200 OK (0ms)
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:27 -0700
+Served asset /bootstrap-typeahead.js - 200 OK (0ms)
+
+
+Started GET "/assets/options.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:27 -0700
+Served asset /options.js - 200 OK (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:27 -0700
+Served asset /application.js - 200 OK (0ms)
+
+
+Started GET "/assets/exam.js?body=1" for 127.0.0.1 at 2012-09-19 10:57:27 -0700
+Served asset /exam.js - 200 OK (0ms)
+
+
+Started GET "/assets/print.css?body=1" for 127.0.0.1 at 2012-09-19 10:57:27 -0700
+Served asset /print.css - 200 OK (0ms)
+
+
+Started GET "/assets/glyphicons-halflings.png" for 127.0.0.1 at 2012-09-19 10:57:27 -0700
+Served asset /glyphicons-halflings.png - 200 OK (0ms)
