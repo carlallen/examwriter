@@ -1,3 +1,7 @@
+Note this is a project used for interview candidates and is out of scope for any and all security reports.  There
+may even be some intentional security issues within here that we left for candidates to find.
+
+
 This is a basic rails application to create written exams to print off and take with pen and paper. 
 
 It will run perfectly on heroku.
